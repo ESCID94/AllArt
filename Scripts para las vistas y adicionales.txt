@@ -1,69 +1,114 @@
-Subidos:
-	-Vista: Las imágenes subidas con su nombre y descripción. Botón para eliminar.
-	-Incluye la barra lateral para ordenar.
-	-Botón para eliminar el contenido (mostrar mensaje de confirmación).
-
-Mis destacados:
-	-Sólo script de vista (mismo script de vista que página principal). 
--Siempre va a estar ordenado por puntuación.
-
-Mis compras:
-	-Vista: Listado de compras. Se visualiza el artículo comprado, la fecha y el precio.
-
-Subir contenido:
-	-Vista: Cuadrado donde agregar el contenido que quieres subir, otro que permita añadir una descripción,  una pestaña que  permita seleccionar la categoría y un botón para confirmar.
-	-Botón para confirmar.
-
-Visualizar contenido:
-	-Vista: muestra el archivo según su formato con su nombre y descripción y comentarios. 
-	-Botón para comprar que lo añadiría al carrito, botón para puntuar y botón descargar???
-	-Añadir comentario.
-
-Visualizar patrocinador:
-	-Vista: Imagen del patrocinador con su nombre y descripción. Tablón para poner comentarios y usuarios a los que patrocina.
-	-Si pinchas en la imagen del usuario patrocinado te lleva a su perfil.
-
-Visualizar usuario:
-	-Vista: la imagen del usuario con su nombre y descripción, la imagen destacada, y sus archivos subidos.
-	-Botón para seguir o dejar de seguir.
-
-Carrito:
-	-Vista: muestra una lista con el archivo que vas a comprar, su precio y la cantidad.
-	-Botón para confirmar la compra.
-
-Cabecera:
-	-Vista: botón principal, barra buscadora, tu imagen de perfil y una barra de pestañas.
-	-Si pinchas la imagen de perfil te lleva a login si no estás registrado y si lo estás te lleva a home.
-	-Botón de subir y botón de logout.
+comun {
+	
+	Header{
+		Cabecera:
+			-Vista: botón principal, barra buscadora, tu imagen de perfil, carrito y una barra de pestañas.
+			-Si pinchas la imagen de perfil te lleva a login si no estás registrado y si lo estás te lleva a home.
+			-Si pinchas la imagen de carrito te lleva a carrito si estás registrado.
+			-Botón de subir y botón de logout.
+		
+	}
+	
+	Foot{
+		Pie de página:
+			-Botón Acerca de y Contacto.
+	}
+	Sidebar{
+		Barra lateral:
+			-Vista: muestra las diferentes categorías.
+			-Al seleccionar una de las categorías ordena el contenido.
+	}
 
 
-Pie de página:
-	-Botón Acerca de y Contacto.
+}
 
-Barra lateral:
-	-Vista: muestra las diferentes categorías.
-	-Al seleccionar una de las categorías ordena el contenido.
+Aplication {
+	MyProfile.php{
 
-Página principal:
-	-Vista: muestra el contenido más valorado, puntuación y autor.
-	-Al pinchar en una imagen que te lleve a la página de ese archivo.
+		Mi perfil:
+			-Vista: muestra imagen de perfil, nombre, descripción y la imagen destacada.
+			-Botón editar perfil.
 
-Home:
-	Mismo script que página principal pero sólo aparece el contenido de las personas a las que sigues.
+		MisDestacados.php{
 
-Mi perfil:
-	-Vista: muestra imagen de perfil, nombre, descripción y la imagen destacada.
-	-Botón editar perfil.
-Seguidos:
-	-Vista: lista con las personas a las que sigues, botón unfollow.
-	-Botón unfollow elimina a la persona seguida.
-	-Si pinchas en la imagen de perfil te lleva al perfil de ese usuario.
+			Mis destacados:
+				-Sólo script de vista (mismo script de vista que página principal). 
+				-Siempre va a estar ordenado por puntuación.	
+		}
+		
+		MisCompras.php{	
 
-Login:
-	-Vista: muestra campo para nombre de usuario y otro para contraseña y un botón para hacer login y otro para registrarte.
-	-Si le das al botón de login comprueba los datos y si existes.
-	-Si pinchas el botón Register te lleva a la página de registro.
+			Mis compras:
+				-Vista: Listado de compras. Se visualiza el artículo comprado, la fecha y el precio.
+		}
 
-Register:
-	-Vista: campos para rellenar con tus datos y tu imagen de perfil.
-	-Botón para confirmar.
+		Subidos.php{
+
+			Subidos:
+				-Vista: Las imágenes subidas con su nombre y descripción. Botón para eliminar.
+				-Incluye la barra lateral para ordenar.
+				-Botón para eliminar el contenido (mostrar mensaje de confirmación).	
+		}
+
+		Seguidos.php{
+
+			Seguidos:
+				-Vista: lista con las personas a las que sigues, botón unfollow.
+				-Botón unfollow elimina a la persona seguida.
+				-Si pinchas en la imagen de perfil te lleva al perfil de ese usuario.	
+		}
+
+	}
+
+
+	PrincipalPage.php{
+	
+		Página principal:
+		-Vista: muestra el contenido más valorado, puntuación y autor.
+		-Al pinchar en una imagen que te lleve a la página de ese archivo.
+
+		Home.php:
+			Mismo script que página principal pero sólo aparece el contenido de las personas a las que sigues.
+	}
+
+	Upload.php{
+
+		Subir contenido:
+			-Vista: Cuadrado donde agregar el contenido que quieres subir, otro que permita añadir una descripción,  una pestaña que  permita seleccionar la categoría y un botón para confirmar.
+			-Botón para confirmar.
+	}
+
+	Visualize.php{
+
+		Visualizar contenido.php:
+			-Vista: muestra el archivo según su formato con su nombre y descripción y comentarios. 
+			-Botón para comprar que lo añadiría al carrito, botón para puntuar y botón descargar???
+			-Añadir comentario.
+
+		Visualizar patrocinador.php:
+
+			-Vista: Imagen del patrocinador con su nombre y descripción. Tablón para poner comentarios y usuarios a los que patrocina.
+			-Si pinchas en la imagen del usuario patrocinado te lleva a su perfil.
+
+		Visualizar usuario.php:
+
+			-Vista: la imagen del usuario con su nombre y descripción, la imagen destacada, y sus archivos subidos.
+			-Botón para seguir o dejar de seguir.
+	}
+
+
+	FormLogin.php{
+
+
+		Login:
+			-Vista: muestra campo para nombre de usuario y otro para contraseña y un botón para hacer login y otro para registrarte.
+			-Si le das al botón de login comprueba los datos y si existes.
+			-Si pinchas el botón Register te lleva a la página de registro.
+
+		Register:
+			-Vista: campos para rellenar con tus datos y tu imagen de perfil.
+			-Botón para confirmar.
+
+	}
+
+}
