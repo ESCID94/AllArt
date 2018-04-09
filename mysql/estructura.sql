@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `Mensajes` (
       PRIMARY KEY (`id`),
       KEY `usuario` (`usuario`),
       KEY `idMensajePadre` (`idMensajePadre`)
-    ) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4
+    ) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 ;
 
 --
 -- Constraints for dumped tables
