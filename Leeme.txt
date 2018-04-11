@@ -1,0 +1,15 @@
+Paso 1: Crear nueva base de datos en phpMyAdmin llamada "estructura"
+Paso 2: Importar el archivo "estructura" y crear una nueva tabla llamada "perfilusuarios"
+
+(Habria exportado la mia pero aun no se muy bien como va :/ )
+
+Paso 3: Copiar todo el contenido de la carpeta en xamp/htdocs para verlo en el localhost
+Paso 4: localhost/NombreCarpeta
+Paso 5: Entrar en formulario inserta perfiles y crear un usuario
+Paso 6: Volver a localhost/NombreCarpeta y entrar en formulario login y loguear con el usuario creado antes
+
+
+-Se puede probar usando con distintos nombres de usuario y distintos tipos de usuario
+-Ahora muestro la contraseña pero solo para ver que funciona mostrar mas campos (en un futuro no se mostraria)
+
+
