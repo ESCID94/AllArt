@@ -1,11 +1,15 @@
 <?php
+
+
+//Modificado
+
 // Varios defines para los parámetros de configuración de acceso a la BD y la URL desde la que se sirve la aplicación
 define('BD_HOST', 'localhost');
-define('BD_NAME', 'AllArt');
+define('BD_NAME', 'allart');
 define('BD_USER', 'admin');
 define('BD_PASS', 'foo2aipheCah');
 define('RAIZ_APP', __DIR__);
-define('RUTA_APP', '/ej3-oo/');
+define('RUTA_APP', '/allart/');
 define('RUTA_IMGS', RUTA_APP.'img/');
 define('RUTA_CSS', RUTA_APP.'css/');
 define('RUTA_JS', RUTA_APP.'js/');
