@@ -20,7 +20,6 @@ $app->doInclude('comun/sidebarIzq.php');
 		<p> Aquí está el contenido público, visible para todos los usuarios. </p>
 	</div>
 <?php
-$app->doInclude('comun/sidebarDer.php');
 $app->doInclude('comun/pie.php');
 ?>
 </div>
