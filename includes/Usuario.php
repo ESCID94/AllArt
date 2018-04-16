@@ -20,14 +20,16 @@ class Usuario {
         $rs->free();
       }
       return $user;
-    }    
+    }  
+  else
+{echo "no encontrado";}  
     return false;
   }
 
   public static function buscaUsuario($username) {
     $app = App::getSingleton();
     $conn = $app->conexionBd();
-    $query = sprintf("SELECT * FROM Usuarios WHERE username='%s'", $conn->real_escape_string($username));
+    $query = sprintf("SELECT * FROM usuarios WHERE username='%s'", $conn->real_escape_string($username));
     $rs = $conn->query($query);
     if ($rs && $rs->num_rows == 1) {
       $fila = $rs->fetch_assoc();
