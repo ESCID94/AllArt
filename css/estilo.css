@@ -2,7 +2,7 @@
 
 div#contenedor {
 	margin: auto;
-	background-color: 	#E6E6FA;
+	background-color: 	#D3D3D3;
 
 }
 
@@ -34,13 +34,13 @@ div#sidebar-left {
 }
 
 div#sidebar-left a, div#sidebar-left a:visited {
-	color: red;
+	color: black;
 	font-weight: bold;
 	text-decoration: none;
 } 
 
 div#sidebar-left a:hover {
-	color: red;
+	color: black;
 	text-decoration: underline;
 } 
 

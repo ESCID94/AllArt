@@ -20,9 +20,7 @@ class Usuario {
         $rs->free();
       }
       return $user;
-    }  
-  else
-{echo "no encontrado";}  
+    }    
     return false;
   }
 
@@ -33,14 +31,14 @@ class Usuario {
     $rs = $conn->query($query);
     if ($rs && $rs->num_rows == 1) {
       $fila = $rs->fetch_assoc();
-      $user = new Usuario($fila['id'], $fila['username'], $fila['password']);
+      $user = new Usuario($fila['id'], $fila['username'], $fila['password'], $fila['Email'], $fila['Descripcion']);
       $rs->free();
 
       return $user;
     }
     return false;
   }
-
+ 
   private $id;
 
   private $username;
@@ -49,11 +47,17 @@ class Usuario {
 
   private $roles;
 
-  private function __construct($id, $username, $password) {
+ private $descripcion;
+ 
+ private $email;
+
+  private function __construct($id, $username, $password, $descripcion, $email) {
     $this->id = $id;
     $this->username = $username;
     $this->password = $password;
     $this->roles = [];
+    $this->descripcion = $descripcion;
+    $this->email = $email;
   }
 
   public function id() {
@@ -71,6 +75,15 @@ class Usuario {
   public function username() {
     return $this->username;
   }
+  public function email()
+{
+	return $this->email;
+}
+  public function descripcion()
+{
+	return $this->descripcion;
+}
+
 
   public function compruebaPassword($password) {
     return password_verify($password, $this->password);

@@ -7,7 +7,8 @@ function mostrarSaludo() {
   if ($app->usuarioLogueado()) {
     $nombreUsuario = $app->nombreUsuario();
     $logoutUrl = $app->resuelve('/logout.php');
-    $html = "Bienvenido, ${nombreUsuario}.<a href='${logoutUrl}'>(salir)</a>";
+    $perfilUrl = $app->resuelve('/Perfil.php');
+    $html = "Bienvenido,<a href='${perfilUrl}'>(${nombreUsuario})</a>.<a href='${logoutUrl}'>(salir)</a>";
   } else {
     $loginUrl = $app->resuelve('/login.php');
     $html = "Usuario desconocido. <a href='${loginUrl}'>Login</a>";
@@ -17,13 +18,8 @@ function mostrarSaludo() {
 }
 
 ?>
-
-
 <div id="cabecera">
-
-	<h1>*Art</h1>
-	
-	
+	<h1>Mi gran página web</h1>
 	<div class="saludo">
 	  <?=	mostrarSaludo() ?>
 	</div>

@@ -7,7 +7,7 @@ require_once __DIR__.'/includes/config.php';
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <link rel="stylesheet" type="text/css" href="<?= $app->resuelve('/css/estilo.css') ?>" />
-  <title>Login</title>
+  <title>Perfil</title>
 </head>
 <body>
 <div id="contenedor">
@@ -17,7 +17,17 @@ $app->doInclude('comun/sidebarIzq.php');
 ?>
 	<div id="contenido">
 		<h1>Acceso al sistema</h1>
-    <?php $formLogin = new \es\ucm\fdi\aw\FormularioLogin(); $formLogin->gestiona(); ?>
+		<p> Hola </p>
+    <?php		
+			echo "$_SESSION[username]";
+			echo "\n";
+			echo "$_SESSION[email]";
+			echo "\n";
+			echo "$_SESSION[descripcion]";
+	?>
+
+
+
 	</div>
 <?php
 $app->doInclude('comun/sidebarDer.php');
