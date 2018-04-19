@@ -20,9 +20,9 @@ $app->doInclude('comun/sidebarIzq.php');
 		<p> Hola </p>
     <?php		
 			echo "$_SESSION[username]";
-			echo "\n";
+			//echo "\n";
 			echo "$_SESSION[email]";
-			echo "\n";
+			//echo "\n";
 			echo "$_SESSION[descripcion]";
 	?>
 
