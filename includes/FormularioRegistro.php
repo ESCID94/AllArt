@@ -11,15 +11,20 @@ class FormularioRegistro extends Form {
   const HTML5_EMAIL_REGEXP = '^[a-zA-Z0-9.!#$%&\'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$';
 
   public function __construct() {
-    parent::__construct('formLogin');
+    parent::__construct('formRegistro');
   }
   
   protected function generaCamposFormulario ($datos) {
-  
+ 
+    if ($datos) {
+      $username = isset($datos['username']) ? $datos['username'] : $username;
+      $password = isset($datos['password']) ? $datos['password'] : $password;
+    }
+
 
     $camposFormulario=<<<EOF
 		<fieldset>
-		  <legend>Usuario y contraseña</legend>
+		  <legend>Registro</legend>
 		  <p><label>Name:</label> <input type="text" name="username"></p> 
 		  <p><label>Password:</label> <input type="password" name="password" ><br /></p>
 		  <p><label>Email:</label> <input type="text" name="Email" ><br /></p>
@@ -37,7 +42,7 @@ EOF;
     $result = array();
     $ok = true;
   
-      $ok = Usuario::registro($username, $password,$email,$descripcion);
+      $ok = Usuario::registro($datos['username'], $datos['password'],$datos['email'],$datos['descripcion']);
       if(!$ok){
 		  
 		  $result[] = 'No se ha completado el registro';

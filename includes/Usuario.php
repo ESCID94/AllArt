@@ -24,6 +24,26 @@ class Usuario {
     return false;
   }
 
+public static function registro($username, $password,$email,$descripcion)
+  {
+	$buscarUsuario = "SELECT * FROM $tbl_name WHERE nombre_usuario = '$_POST[username]' ";
+	$result = $conexion->query($buscarUsuario);
+	$count = mysqli_num_rows($result);
+	if ($count == 1)
+	{
+		echo "<br />". "El Nombre de Usuario ya a sido tomado." . "<br />";
+	}
+	else
+	{
+		$pass = password_hash($password, PASSWORD_DEFAULT)
+		$query = "INSERT INTO usuarios (username, password,Email,NULL, Descripcion) VALUES ('$_POST[username]', '$pass', '$_POST[email]',$fila['FechaNac'] '$_POST[descripcion]')";
+
+		if ($conexion->query($query) === TRUE) {echo "<br />" . "<h2>" . "Usuario Creado Exitosamente!" . "</h2>";}
+	}
+	return true;
+ }
+
+
   public static function buscaUsuario($username) {
     $app = App::getSingleton();
     $conn = $app->conexionBd();

@@ -11,7 +11,8 @@ function mostrarSaludo() {
     $html = "Bienvenido,<a href='${perfilUrl}'>(${nombreUsuario})</a>.<a href='${logoutUrl}'>(salir)</a>";
   } else {
     $loginUrl = $app->resuelve('/login.php');
-    $html = "Usuario desconocido. <a href='${loginUrl}'>Login</a>";
+    $RegistroUrl = $app->resuelve('/registro.php');
+    $html = "Usuario desconocido. <a href='${loginUrl}'>Login</a>/<a href='${RegistroUrl}'>Registrarse</a>";
   }
 
   return $html;

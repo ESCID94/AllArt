@@ -19,8 +19,10 @@ $app->doInclude('comun/cabecera.php');
 $app->doInclude('comun/sidebarIzq.php');
 ?>
 	<div id="contenido">
-		<h1>Acceso al sistema</h1>
-    <?php $formularioRegistro = new \es\ucm\fdi\aw\FormularioRegistro(); $formRegistro->gestiona(); ?>
+		<h1>Registro: </h1>
+    <?php $formRegistro = new \es\ucm\fdi\aw\FormularioRegistro();
+	 $formRegistro->gestiona();
+	 ?>
 	</div>
 <?php
 $app->doInclude('comun/sidebarDer.php');
