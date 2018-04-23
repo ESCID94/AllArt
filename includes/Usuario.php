@@ -11,7 +11,7 @@ class Usuario {
     if ($user && $user->compruebaPassword($password)) {
       $app = App::getSingleton();
       $conn = $app->conexionBd();
-      $query = sprintf("SELECT R.nombre FROM RolesUsuario RU, Roles R WHERE RU.rol = R.id AND RU.usuario=%s", $conn->real_escape_string($user->id));
+      $query = sprintf("SELECT R.nombre FROM rolesusuario RU, roles R WHERE RU.rol = R.id AND RU.usuario=%s", $conn->real_escape_string($user->id));
       $rs = $conn->query($query);
       if ($rs) {
         while($fila = $rs->fetch_assoc()) { 
@@ -24,25 +24,32 @@ class Usuario {
     return false;
   }
 
-public static function registro($username, $password,$email,$descripcion)
+public static function registro($username, $password,$email,$fechaNac,$descripcion)
   {
-	$buscarUsuario = "SELECT * FROM $tbl_name WHERE nombre_usuario = '$_POST[username]' ";
-	$result = $conexion->query($buscarUsuario);
-	$count = mysqli_num_rows($result);
-	if ($count == 1)
-	{
-		echo "<br />". "El Nombre de Usuario ya a sido tomado." . "<br />";
-	}
-	else
-	{
-		$pass = password_hash($password, PASSWORD_DEFAULT)
-		$query = "INSERT INTO usuarios (username, password,Email,NULL, Descripcion) VALUES ('$_POST[username]', '$pass', '$_POST[email]',$fila['FechaNac'] '$_POST[descripcion]')";
-
-		if ($conexion->query($query) === TRUE) {echo "<br />" . "<h2>" . "Usuario Creado Exitosamente!" . "</h2>";}
-	}
-	return true;
- }
-
+    $buscarUsuario = "SELECT * FROM usuarios WHERE username = '$_POST[username]' ";
+    $app = App::getSingleton();
+    $conn = $app->conexionBd();
+	  $result = $conn->query($buscarUsuario);
+	  $count = mysqli_num_rows($result);
+	  if ($count >= 1)
+	  {
+		  echo "<br />". "El Nombre de Usuario ya a sido tomado." . "<br />";
+	  }
+	  else
+	  {
+		  $pass = password_hash($password, PASSWORD_DEFAULT);      
+		  $reg = "INSERT INTO usuarios(username, password, Email, FechaNac, Descripcion) VALUES ($username, $pass, $email, $fechaNac, $descripcion)";
+      if ($conn->query($reg)=== TRUE)
+		  {
+			 echo "<br />" . "<h2>" . "Usuario Creado Exitosamente!" . "</h2>";
+		  }
+      else
+      {
+        echo "error";
+      }
+	  }
+	  return $conn;
+  }
 
   public static function buscaUsuario($username) {
     $app = App::getSingleton();
