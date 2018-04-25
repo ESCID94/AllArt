@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/Aplicacion.php';
+
 namespace es\ucm\fdi\aw;
 
 class FormularioLogin extends Form {

@@ -1,15 +1,19 @@
-
+body {
+	background-color: #CDCDCD;
+}
 
 div#contenedor {
+	width: 900px;
 	margin: auto;
-	background-color: 	#D3D3D3;
-
+	border: 1px solid black;
+	background-color: #aaaaaa;
+	margin-top: 30px;
 }
 
 div#cabecera {
 	padding: 30px;
 	height: 100px;
-	background-color: #B0C4DE;
+	background-color: #303030;
 	color: white;
 }
 
@@ -31,22 +35,31 @@ div#sidebar-left {
 	float: left;
 	width: 170px;
 	height: 400px;
+	background-color: #dddddd;
 }
 
 div#sidebar-left a, div#sidebar-left a:visited {
-	color: black;
+	color: red;
 	font-weight: bold;
 	text-decoration: none;
 } 
 
 div#sidebar-left a:hover {
-	color: black;
+	color: red;
 	text-decoration: underline;
 } 
 
 
+div#sidebar-right {
+	padding: 10px;
+	float: right;
+	width: 170px;
+	height: 400px;
+	background-color: #dddddd;
+}
+
 div#contenido {
-	padding: 278px;
+	padding: 10px;
 	float: left;
 	min-height: 600px;
 	width: 500px;
@@ -55,10 +68,10 @@ div#contenido {
 
 div#pie {
 	clear: both;
-	padding: 30px;
-	background-color: #B0C4DE;
-	color: red;
-	text-align: center;	
+	padding: 20px;
+	background-color: #303030;
+	color: white;
+	text-align: center;
 }
 
 div.saludo {
@@ -66,9 +79,18 @@ div.saludo {
 	text-align: right;
 }
 
+fieldset .control {
+	width: 100%;
+}
+
+fieldset .grupo-control {
+	margin: 5px;
+}
+
+
 fieldset {
 	border: 1px solid black;
-	width: 15em;
+	width: 80%;
 	margin: 0 auto;
 }
 
@@ -80,13 +102,10 @@ legend {
 } 
 
 label {
-	width: 4em;
-	float: left;
-	text-align: right;
+/* 	width: 4em; */
+/*	float: left; */
+/* 	text-align: right; */
 	margin-right: 0.5em;
 	display: block;
 }
 
-button {
-	margin-left: 100px;
-} 

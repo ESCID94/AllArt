@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/Aplicacion.php';
+
 namespace es\ucm\fdi\aw;
 
 use es\ucm\fdi\aw\Aplicacion as App;
