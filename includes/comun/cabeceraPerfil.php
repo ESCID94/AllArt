@@ -24,5 +24,24 @@ function mostrarSaludo() {
 	<div class="saludo">
 	  <?=	mostrarSaludo() ?>
 	</div>
-</div>
 
+	<div class="topnav">
+		<a href="#musica">Música</a>
+  		<a href="#pintura">Pintura</a>
+ 		<a href="#videos">Videos</a>
+ 		<a href="#escritos">Escritos</a>
+  		<a href="#patrocinadores">Patrocinadores</a>
+
+		<input type = "text" placeholder = "Search..">
+	
+		<br/>
+		<br/>
+		<a href="#home">Home</a>
+		<a href="#miperfil">Mi Perfil</a>
+		<a href="#seguidos">Seguidos</a>
+		<a href="#subidos">Archivos Subidos</a>
+		<a href="#destacados">Mis Destacados</a>
+		<a href="#compras">Mis Compras</a>
+
+	
+</div>

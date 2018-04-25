@@ -1,8 +1,12 @@
 <?php
 
 
-require_once __DIR__.'/config.php';
-require_once __DIR__.'/formlib.php';
+//Inicio del procesamiento
+session_start();
+
+
+require_once __DIR__.'/includes/config.php';
+require_once __DIR__.'/includes/formlib.php';
 
 namespace es\ucm\fdi\aw;
 
