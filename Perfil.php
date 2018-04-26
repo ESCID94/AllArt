@@ -24,6 +24,8 @@ $app->doInclude('comun/sidebarIzq.php');
 			echo "Email: " . "$_SESSION[email]";
 			echo "</br>";
 			echo "Descripcion: " . "$_SESSION[descripcion]";
+			echo "</br>";
+			echo '<input type="button" value="Modificar perfil" onclick="location.href=http:/modPerfil.php"/>';
 		?>
 	</div>
 <?php
