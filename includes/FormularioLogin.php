@@ -36,10 +36,10 @@ EOF;
     $result = array();
     $ok = true;
     $username = isset($datos['username']) ? $datos['username'] : null ;
-    if ( !$username || ! mb_ereg_match(self::HTML5_EMAIL_REGEXP, $username) ) {
-      $result[] = 'El nombre de usuario no es válido';
-      $ok = false;
-    }
+    //if ( !$username || ! mb_ereg_match(self::HTML5_EMAIL_REGEXP, $username) ) {
+   //  $result[] = 'El nombre de usuario no es válido';
+   //   $ok = false;
+   // }
 
     $password = isset($datos['password']) ? $datos['password'] : null ;
     if ( ! $password ||  mb_strlen($password) < 4 ) {
@@ -49,14 +49,16 @@ EOF;
 
     if ( $ok ) {
       $user = Usuario::login($username, $password);
+      echo '$user';
       if ( $user ) {
         // SEGURIDAD: Forzamos que se genere una nueva cookie de sesión por si la han capturado antes de hacer login
         session_regenerate_id(true);
         Aplicacion::getSingleton()->login($user);
         $result = \es\ucm\fdi\aw\Aplicacion::getSingleton()->resuelve('/index.php');
-	$_SESSION[username] = $user->username();
-	 $_SESSION[email] = $user->email();
-	 $_SESSION[descripcion] = $user->descripcion();
+	      $_SESSION[username] = $user->username();
+        $_SESSION[email] = $user->email();
+        $_SESSION[descripcion] = $user->descripcion();
+        $_SESSION[imgPerfil] = $user->imgPerfil();
 
       }else {
         $result[] = 'El usuario o la contraseña es incorrecta';

@@ -14,13 +14,13 @@ class Usuario {
       $query = sprintf("SELECT R.nombre FROM rolesusuario RU, roles R WHERE RU.rol = R.id AND RU.usuario=%s", $conn->real_escape_string($user->id));
       $rs = $conn->query($query);
       if ($rs) {
-        while($fila = $rs->fetch_assoc()) { 
-          $user->addRol($fila['nombre']);
-        }
+       // while($fila = $rs->fetch_assoc()) { 
+        //  $user->addRol($fila['nombre']);
+        //}
         $rs->free();
       }
       return $user;
-    }    
+    }
     return false;
   }
 
@@ -33,19 +33,26 @@ public static function registro($username, $password,$email,$fechaNac,$descripci
 	  $count = mysqli_num_rows($result);
 	  if ($count >= 1)
 	  {
-		  echo "<br />". "El Nombre de Usuario ya a sido tomado." . "<br />";
+		  echo "<br />". "El Nombre de Usuario ya ha sido tomado." . "<br />";
 	  }
 	  else
 	  {
 		  $pass = password_hash($password, PASSWORD_DEFAULT);      
-		  $reg = "INSERT INTO usuarios(username, password, Email, FechaNac, Descripcion) VALUES ($username, $pass, $email, $fechaNac, $descripcion)";
+		  //$reg = "INSERT INTO usuarios(username, password, Email, FechaNac, Descripcion) VALUES ($username, $pass, $email, $fechaNac, $descripcion)"; 
+      $reg = sprintf("INSERT INTO usuarios(username, password,Email,FechaNac, Descripcion, imagenPerfil) VALUES('%s', '%s', '%s', '%s', '%s', '%s')"
+          , $conn->real_escape_string($username)
+          , password_hash($password, PASSWORD_DEFAULT)
+          , $conn->real_escape_string($email)
+          , $fechaNac
+          , $conn->real_escape_string($descripcion)
+          , 'img/imgBasica.jpg');
       if ($conn->query($reg)=== TRUE)
 		  {
 			 echo "<br />" . "<h2>" . "Usuario Creado Exitosamente!" . "</h2>";
 		  }
       else
       {
-        echo "error";
+        echo "Error al configurar la codificación de la BD: (" . $conn->errno . ") " . utf8_encode($conn->error);
       }
 	  }
 	  return $conn;
@@ -58,7 +65,7 @@ public static function registro($username, $password,$email,$fechaNac,$descripci
     $rs = $conn->query($query);
     if ($rs && $rs->num_rows == 1) {
       $fila = $rs->fetch_assoc();
-      $user = new Usuario($fila['id'], $fila['username'], $fila['password'], $fila['Email'], $fila['Descripcion']);
+      $user = new Usuario($fila['id'], $fila['username'], $fila['password'], $fila['Descripcion'], $fila['Email'], $fila['imagenPerfil']);
       $rs->free();
 
       return $user;
@@ -78,13 +85,16 @@ public static function registro($username, $password,$email,$fechaNac,$descripci
  
  private $email;
 
-  private function __construct($id, $username, $password, $descripcion, $email) {
+ private $imgPerfil;
+
+  private function __construct($id, $username, $password, $descripcion, $email, $imgPerfil) {
     $this->id = $id;
     $this->username = $username;
     $this->password = $password;
     $this->roles = [];
     $this->descripcion = $descripcion;
     $this->email = $email;
+    $this->imgPerfil = $imgPerfil;
   }
 
   public function id() {
@@ -110,7 +120,10 @@ public static function registro($username, $password,$email,$fechaNac,$descripci
 {
 	return $this->descripcion;
 }
-
+public function imgPerfil()
+{
+  return $this->imgPerfil;
+}
 
   public function compruebaPassword($password) {
     return password_verify($password, $this->password);
