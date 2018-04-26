@@ -16,18 +16,15 @@ $app->doInclude('comun/cabecera.php');
 $app->doInclude('comun/sidebarIzq.php');
 ?>
 	<div id="contenido">
-		<h1>Acceso al sistema</h1>
-		<p> Hola </p>
-    <?php		
-			echo "$_SESSION[username]";
-			//echo "\n";
-			echo "$_SESSION[email]";
-			//echo "\n";
-			echo "$_SESSION[descripcion]";
-	?>
-
-
-
+    	<?php		
+			echo "<img src='$_SESSION[imgPerfil]' border='0' width='100' height='100'>";
+			echo "</br>";
+			echo "Nombre: " . "$_SESSION[username]";
+			echo "</br>";
+			echo "Email: " . "$_SESSION[email]";
+			echo "</br>";
+			echo "Descripcion: " . "$_SESSION[descripcion]";
+		?>
 	</div>
 <?php
 $app->doInclude('comun/sidebarDer.php');
