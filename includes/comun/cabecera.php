@@ -20,7 +20,7 @@ function mostrarSaludo() {
 
 ?>
 <div id="cabecera">
-	<h1>*Art</h1>
+	<h1>Mi gran página web</h1>
 	<div class="saludo">
 	  <?=	mostrarSaludo() ?>
 	</div>

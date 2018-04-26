@@ -1,14 +1,11 @@
 <?php
 
-//Inicio del procesamiento
-session_start();
 
+//Modificado
 
 require_once __DIR__.'/includes/config.php';
-require_once __DIR__.'/includes/FormularioRegistro.php';
 
-?>
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">

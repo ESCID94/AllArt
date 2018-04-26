@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/Aplicacion.php';
+//Modificado
 
 namespace es\ucm\fdi\aw;
 

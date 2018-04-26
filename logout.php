@@ -1,23 +1,10 @@
 <?php
 
-//Inicio del procesamiento
-session_start();
-
-
 require_once __DIR__.'/includes/config.php';
-
-//Doble seguridad: unset + destroy
-unset($_SESSION["login"]);
-unset($_SESSION["esAdmin"]);
-unset($_SESSION["nombre"]);
-
-
-session_destroy();
 
 $app->logout();
 
-?>
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">

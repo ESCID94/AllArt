@@ -1,19 +1,12 @@
 <?php
 
-//Inicio del procesamiento
-session_start();
-
-
 require_once __DIR__.'/includes/config.php';
-require_once __DIR__.'/includes/FormularioRespuesta.php';
-require_once __DIR__.'/includes/FormularioMensaje.php';
 
 use \es\ucm\fdi\aw\Mensaje;
 use \es\ucm\fdi\aw\FormularioMensaje;
 use \es\ucm\fdi\aw\FormularioRespuesta;
 
-?>
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
