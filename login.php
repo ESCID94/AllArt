@@ -20,7 +20,6 @@ $app->doInclude('comun/sidebarIzq.php');
     <?php $formLogin = new \es\ucm\fdi\aw\FormularioLogin(); $formLogin->gestiona(); ?>
 	</div>
 <?php
-$app->doInclude('comun/sidebarDer.php');
 $app->doInclude('comun/pie.php');
 ?>
 </div>
