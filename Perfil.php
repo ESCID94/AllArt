@@ -29,7 +29,6 @@ $app->doInclude('comun/sidebarIzq.php');
 		?>
 	</div>
 <?php
-$app->doInclude('comun/sidebarDer.php');
 $app->doInclude('comun/pie.php');
 ?>
 </div>

@@ -55,7 +55,6 @@ foreach($mensajes as $m) {
         </ul>
 	</div>
 <?php
-$app->doInclude('comun/sidebarDer.php');
 $app->doInclude('comun/pie.php');
 ?>
 </div>
