@@ -80,19 +80,31 @@ public static function registro($username, $password,$email,$fechaNac,$descripci
 
     $idUser = "SELECT U.id FROM usuarios U WHERE username = '$_POST[username]' ";
 
+
+   // echo "SELECT U.id FROM usuarios U WHERE username = $_POST[username] ";
+
     $result = $conn->query($idUser);
 
-    //$fila = $result->fetch_array($conn);
+    //$fila = $result->fetch_array(MYSQLI_ASSOC);
 
     $count = mysqli_num_rows($result);
+
+    //echo "$count";
 
 
     if ($count == 1)
     { 
-      $reg = sprintf("UPDATE `usuarios U` SET `id`= $idUser,`username`= $conn->real_escape_string($username),`password`=password_hash($password, PASSWORD_DEFAULT),`Email`= $conn->real_escape_string($email),`FechaNac`=$fechaNac,`Descripcion`=$conn->real_escape_string($descripcion),`imagenPerfil`='img/imgBasica.jpg' WHERE $result = U.id");
+
+      $pass = password_hash($password, PASSWORD_DEFAULT);
+      $reg = sprintf("UPDATE `usuarios U` SET `id`= $idUser,`username`= $username,`password`=$pass,`Email`= $conn->real_escape_string($email),`FechaNac`=$fechaNac,`Descripcion`=$conn->real_escape_string($descripcion),`imagenPerfil`='img/imgBasica.jpg' WHERE $result->id = U.id");
+
+     // echo "</br>";
+// echo "UPDATE `usuarios U` SET `id`= $idUser,`username`= $username,`password`= $pass,`Email`= $conn->real_escape_string($email),`FechaNac`=$fechaNac,`Descripcion`=$conn->real_escape_string($descripcion),`imagenPerfil`='img/imgBasica.jpg' WHERE $result->id = U.id";
+
+     // echo "</br>";
 
 
-      if ($conn->mysqli_query($reg[])=== TRUE)
+      if ($conn->query($reg)=== TRUE)
       {
   
          echo "<br />" . "<h2>" . "Usuario modificado exitosamente!" . "</h2>";
