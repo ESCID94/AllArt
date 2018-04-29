@@ -1,7 +1,5 @@
 <?php
 
-require_once __DIR__ . '/Aplicacion.php';
-
 namespace es\ucm\fdi\aw;
 
 class FormularioModPerfil extends Form {
@@ -15,23 +13,27 @@ class FormularioModPerfil extends Form {
   protected function generaCamposFormulario ($datos) {
  
     $username = $_SESSION[username];
+    $password = $_SESSION[password];
     $Email = $_SESSION[email];
+    $Descripcion = $_SESSION[descripcion];
+    $FechaNac = $_SESSION[fechaNac];
 
-    if ($datos) {
+   /* if ($datos) {
       $username = isset($datos['username']) ? $datos['username'] : $username;
       $password = isset($datos['password']) ? $datos['password'] : $password;
-    }
+      $Email = isset($datos['password']) ? $datos['password'] : $password;
+    }*/
 
 
     $camposFormulario=<<<EOF
 		<fieldset>
 		  <legend>Registro</legend>
-		  <p><label>Name:</label> <input type="text" name="username"></p> 
+		  <p><label>Name:</label> <input type="text" name="username" value="$username"></p> 
 		  <p><label>Password:</label> <input type="password" name="password" ><br /></p>
-		  <p><label>Email:</label> <input type="text" name="Email" ><br /></p>
-      <p><label>Fecha nacimiento:</label><input type="date" name="FechaNac" ><br /></p>
-		  <p><label>Descripcion:</label> <input type="text" name="Descripcion" ><br /></p>
-		  <button type="submit">Registrarse</button>
+		  <p><label>Email:</label> <input type="text" name="Email" value="$Email" ><br /></p>
+      <p><label>Fecha nacimiento:</label><input type="date" name="FechaNac" value="$FechaNac" ><br /></p>
+		  <p><label>Descripcion:</label> <input type="text" name="Descripcion" value="$Descripcion"><br /></p>
+		  <button type="submit">Guardar cambios</button>
 		</fieldset>
 EOF;
     return $camposFormulario;
@@ -43,12 +45,12 @@ EOF;
   protected function procesaFormulario($datos) {
     $result = array();
     $ok = true;
-    $ok = Usuario::registro($datos['username'], $datos['password'],$datos['Email'],$datos['FechaNac'],$datos['Descripcion']);
+    $ok = Usuario::modPerfil($datos['username'], $datos['password'],$datos['Email'],$datos['FechaNac'],$datos['Descripcion']);
     if(!$ok)
     { 
 		  $result[] = 'No se ha completado el registro';
     }
-	 else
+	 /*else
 	 {
 	   $user = Usuario::login($username, $password);	  
 	   if ( $user ) 
@@ -58,7 +60,7 @@ EOF;
         Aplicacion::getSingleton()->login($user);
         $result = \es\ucm\fdi\aw\Aplicacion::getSingleton()->resuelve('/index.php');
      	}
-    }
+    }*/
     return $result;
   }
 }

@@ -65,12 +65,45 @@ public static function registro($username, $password,$email,$fechaNac,$descripci
     $rs = $conn->query($query);
     if ($rs && $rs->num_rows == 1) {
       $fila = $rs->fetch_assoc();
-      $user = new Usuario($fila['id'], $fila['username'], $fila['password'], $fila['Descripcion'], $fila['Email'], $fila['imagenPerfil']);
+      $user = new Usuario($fila['id'], $fila['username'], $fila['password'], $fila['Descripcion'], $fila['Email'],$fila['FechaNac'], $fila['imagenPerfil']);
       $rs->free();
 
       return $user;
     }
     return false;
+  }
+
+  public static function modPerfil ($username, $password,$email,$fechaNac,$descripcion)
+  {
+    $app = App::getSingleton();
+    $conn = $app->conexionBd();
+
+    $idUser = "SELECT U.id FROM usuarios U WHERE username = '$_POST[username]' ";
+
+    $result = $conn->query($idUser);
+
+    //$fila = $result->fetch_array($conn);
+
+    $count = mysqli_num_rows($result);
+
+
+    if ($count == 1)
+    { 
+      $reg = sprintf("UPDATE `usuarios U` SET `id`= $idUser,`username`= $conn->real_escape_string($username),`password`=password_hash($password, PASSWORD_DEFAULT),`Email`= $conn->real_escape_string($email),`FechaNac`=$fechaNac,`Descripcion`=$conn->real_escape_string($descripcion),`imagenPerfil`='img/imgBasica.jpg' WHERE $result = U.id");
+
+
+      if ($conn->mysqli_query($reg[])=== TRUE)
+      {
+  
+         echo "<br />" . "<h2>" . "Usuario modificado exitosamente!" . "</h2>";
+    
+      }
+      else
+      {
+        echo "Error al configurar la codificación de la BD: (" . $conn->errno . ") " . utf8_encode($conn->error);
+      }
+    }
+    return $conn;
   }
  
   private $id;
@@ -85,15 +118,18 @@ public static function registro($username, $password,$email,$fechaNac,$descripci
  
  private $email;
 
+ private $fechaNac;
+
  private $imgPerfil;
 
-  private function __construct($id, $username, $password, $descripcion, $email, $imgPerfil) {
+  private function __construct($id, $username, $password, $descripcion, $email,$fechaNac, $imgPerfil) {
     $this->id = $id;
     $this->username = $username;
     $this->password = $password;
     $this->roles = [];
     $this->descripcion = $descripcion;
     $this->email = $email;
+    $this->fechaNac = $fechaNac;
     $this->imgPerfil = $imgPerfil;
   }
 
@@ -123,6 +159,10 @@ public static function registro($username, $password,$email,$fechaNac,$descripci
 public function imgPerfil()
 {
   return $this->imgPerfil;
+}
+public function fechaNac()
+{
+  return $this->fechaNac;
 }
 
   public function compruebaPassword($password) {
