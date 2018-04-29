@@ -25,7 +25,12 @@ $app->doInclude('comun/sidebarIzq.php');
 			echo "</br>";
 			echo "Descripcion: " . "$_SESSION[descripcion]";
 			echo "</br>";
-			echo '<input type="button" value="Modificar perfil" onclick="location.href=http:/modPerfil.php"/>';
+			echo "Fecha nacimiento: " . " $_SESSION[fechaNac]";
+			echo "</br>";
+
+
+			$URLMod =  $app->resuelve('/modPerfil.php');
+			echo '<input type="button" value="Modificar perfil" onclick="location.href= $URLMod "/>';
 		?>
 	</div>
 <?php
