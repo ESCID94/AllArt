@@ -28,9 +28,11 @@ $app->doInclude('comun/sidebarIzq.php');
 			echo "Fecha nacimiento: " . " $_SESSION[fechaNac]";
 			echo "</br>";
 
-
 			$URLMod =  $app->resuelve('/modPerfil.php');
 			echo '<input type="button" value="Modificar perfil" onclick="location.href=\'' . $URLMod . '\'"/>';
+            
+            $URLPassMod =  $app->resuelve('/modPass.php');
+			echo '<input type="button" value="Modificar contraseña" onclick="location.href=\'' . $URLPassMod . '\'"/>';
 		?>
 	</div>
 <?php

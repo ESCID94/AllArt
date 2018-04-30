@@ -20,7 +20,7 @@ function mostrarSaludo() {
 
 ?>
 <div id="cabecera">
-	<h1>*Art</h1>
+	<img src="img/logoAllArt.png" alt="Logo AllArt">
 	<div class="saludo">
 	  <?=	mostrarSaludo() ?>
 	</div>
