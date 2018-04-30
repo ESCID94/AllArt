@@ -73,49 +73,74 @@ public static function registro($username, $password,$email,$fechaNac,$descripci
     return false;
   }
 
-  public static function modPerfil ($username, $password,$email,$fechaNac,$descripcion)
+  public static function modPerfil ($username,$email,$fechaNac,$descripcion)
   {
-    $app = App::getSingleton();
-    $conn = $app->conexionBd();
+    $user = self::buscaUsuario($_SESSION['username']);
+    if ($user) {
+        $app = App::getSingleton();
+        $conn = $app->conexionBd();
 
-    $idUser = "SELECT U.id FROM usuarios U WHERE username = '$_POST[username]' ";
-
+    //$idUser = "SELECT U.id FROM usuarios U WHERE username = '$_SESSION[username]' "; //QUITAR
 
    // echo "SELECT U.id FROM usuarios U WHERE username = $_POST[username] ";
 
-    $result = $conn->query($idUser);
+    //$result = $conn->query($idUser); //QUITAR
+
+//BORRAR echo "$result->id";
 
     //$fila = $result->fetch_array(MYSQLI_ASSOC);
 
-    $count = mysqli_num_rows($result);
+    //$count = mysqli_num_rows($result);
 
     //echo "$count";
 
 
-    if ($count == 1)
-    { 
+    //if ($result && $result->num_rows == 1)
+    //{ 
+      //$fila = $result->fetch_assoc();
+      //$pass = password_hash($password, PASSWORD_DEFAULT);
+      //$reg = sprintf("UPDATE usuarios U SET username= $username,`Email`= $conn->real_escape_string($email),`FechaNac`=$fechaNac,`Descripcion`=$conn->real_escape_string($descripcion),`imagenPerfil`='img/imgBasica.jpg' WHERE $result->id = U.id");
 
-      $pass = password_hash($password, PASSWORD_DEFAULT);
-      $reg = sprintf("UPDATE `usuarios U` SET `id`= $idUser,`username`= $username,`password`=$pass,`Email`= $conn->real_escape_string($email),`FechaNac`=$fechaNac,`Descripcion`=$conn->real_escape_string($descripcion),`imagenPerfil`='img/imgBasica.jpg' WHERE $result->id = U.id");
+//BORRAR $updateSQL= sprintf("UPDATE `test` SET `type`='testdata', `priority`=%s, `note`=%s WHERE `id`=%s;",SQLVal('100', "int"),SQLVal($note, "text"),SQLVal($ref_id, "int"));
+
+
+      $reg = sprintf("UPDATE usuarios U SET username='%s', Descripcion='%s', Email='%s', FechaNac='%s' WHERE '%s' = U.id"
+        , $conn->real_escape_string($username)
+        , $conn->real_escape_string($descripcion)
+        , $conn->real_escape_string($email)
+        , $fechaNac
+        , $conn->real_escape_string($user->id) );
+
+
+
+ //BORRAR $reg = sprintf("INSERT INTO usuarios(username, password,Email,FechaNac, Descripcion, imagenPerfil) VALUES('%s', '%s', '%s', '%s', '%s', '%s')"
 
      // echo "</br>";
 // echo "UPDATE `usuarios U` SET `id`= $idUser,`username`= $username,`password`= $pass,`Email`= $conn->real_escape_string($email),`FechaNac`=$fechaNac,`Descripcion`=$conn->real_escape_string($descripcion),`imagenPerfil`='img/imgBasica.jpg' WHERE $result->id = U.id";
 
      // echo "</br>";
 
-
       if ($conn->query($reg)=== TRUE)
       {
-  
+        $user->username=$username;
+        $user->descripcion=$descripcion;
+        $user->email=$email;
+        $user->fechaNac=$fechaNac;
          echo "<br />" . "<h2>" . "Usuario modificado exitosamente!" . "</h2>";
     
       }
       else
       {
-        echo "Error al configurar la codificación de la BD: (" . $conn->errno . ") " . utf8_encode($conn->error);
+        echo "Error: (" . $conn->errno . ") ";
+        return false;
       }
-    }
-    return $conn;
+    //}
+    return $user;
+}
+else {
+    //error fatal: usuario no encontrado
+    return false;
+}
   }
  
   private $id;

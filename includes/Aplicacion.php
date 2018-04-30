@@ -56,20 +56,37 @@ class Aplicacion {
   }
 
   public function login(Usuario $user) {
+
     $_SESSION['login'] = true;
-    $_SESSION['nombre'] = $user->username();
-    $_SESSION['roles'] = $user->roles();
+    $_SESSION['username'] = $user->username();
+    $_SESSION['email'] = $user->email();
+    $_SESSION['descripcion'] = $user->descripcion();
+    $_SESSION['imgPerfil'] = $user->imgPerfil();
+    $_SESSION['fechaNac'] = $user->fechaNac();
+    //$_SESSION['roles'] = $user->roles();
   }
 
   public function logout() {
     //Doble seguridad: unset + destroy
     unset($_SESSION["login"]);
-    unset($_SESSION["nombre"]);
-    unset($_SESSION["roles"]);
-
+    unset($_SESSION["username"]);
+    unset($_SESSION["email"]);
+    unset($_SESSION["descripcion"]);
+    unset($_SESSION["imgPerfil"]);
+    unset($_SESSION["fechaNac"]);
+    //unset($_SESSION["roles"]);
 
     session_destroy();
     session_start();
+  }
+
+ public function modPerfil(Usuario $user) {
+
+    $_SESSION['username'] = $user->username();
+    $_SESSION['email'] = $user->email();
+    $_SESSION['descripcion'] = $user->descripcion();
+    $_SESSION['imgPerfil'] = $user->imgPerfil();
+    $_SESSION['fechaNac'] = $user->fechaNac();
   }
 
   public function usuarioLogueado() {
@@ -77,7 +94,7 @@ class Aplicacion {
   }
 
   public function nombreUsuario() {
-    return isset($_SESSION['nombre']) ? $_SESSION['nombre'] : '';
+    return isset($_SESSION['username']) ? $_SESSION['username'] : '';
   }
 
   public function conexionBd() {

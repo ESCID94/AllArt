@@ -30,7 +30,7 @@ $app->doInclude('comun/sidebarIzq.php');
 
 
 			$URLMod =  $app->resuelve('/modPerfil.php');
-			echo '<input type="button" value="Modificar perfil" onclick="location.href= $URLMod "/>';
+			echo '<input type="button" value="Modificar perfil" onclick="location.href=\'' . $URLMod . '\'"/>';
 		?>
 	</div>
 <?php
