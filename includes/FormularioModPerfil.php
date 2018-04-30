@@ -46,7 +46,7 @@ EOF;
     $ok = true;
     $username = isset($datos['username']) ? $datos['username'] : null ;
     if ( !$username ) {
-     $result[] = 'El nombre de usuario no es válido';
+      $result[] = 'El nombre de usuario no es válido';
       $ok = false;
     }
 

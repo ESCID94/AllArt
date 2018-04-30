@@ -55,7 +55,6 @@ EOF;
         session_regenerate_id(true);
         Aplicacion::getSingleton()->login($user);
         $result = \es\ucm\fdi\aw\Aplicacion::getSingleton()->resuelve('/index.php');
-        echo "Todo ok";
 
       }else {
         $result[] = 'El usuario o la contraseña es incorrecta';
