@@ -29,12 +29,17 @@ public static function registro($username, $password,$email,$fechaNac,$descripci
     $buscarUsuario = "SELECT * FROM usuarios WHERE username = '$_POST[username]' ";
     $app = App::getSingleton();
     $conn = $app->conexionBd();
-	  $result = $conn->query($buscarUsuario);
-	  $count = mysqli_num_rows($result);
-	  if ($count >= 1)
+	  /*$result = $conn->query($buscarUsuario);
+	  $count = mysqli_num_rows($result);*/
+	  
+      //if ($count >= 1)
+      if(self::buscaUsuario($username))
 	  {
 		  echo "<br />". "El Nombre de Usuario ya ha sido tomado." . "<br />";
 	  }
+      elseif (self::buscaEmail($email)){ //Comprobar que no se ha registrado otro usuario con el mismo email
+          echo "<br />". "El Email ya ha sido tomado." . "<br />";
+      }
 	  else
 	  {
 		  //$pass = password_hash($password, PASSWORD_DEFAULT);      
