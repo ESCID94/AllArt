@@ -37,7 +37,7 @@ public static function registro($username, $password,$email,$fechaNac,$descripci
 	  }
 	  else
 	  {
-		  $pass = password_hash($password, PASSWORD_DEFAULT);      
+		  //$pass = password_hash($password, PASSWORD_DEFAULT);      
 		  //$reg = "INSERT INTO usuarios(username, password, Email, FechaNac, Descripcion) VALUES ($username, $pass, $email, $fechaNac, $descripcion)"; 
       $reg = sprintf("INSERT INTO usuarios(username, password,Email,FechaNac, Descripcion, imagenPerfil) VALUES('%s', '%s', '%s', '%s', '%s', '%s')"
           , $conn->real_escape_string($username)
@@ -62,6 +62,21 @@ public static function registro($username, $password,$email,$fechaNac,$descripci
     $app = App::getSingleton();
     $conn = $app->conexionBd();
     $query = sprintf("SELECT * FROM usuarios WHERE username='%s'", $conn->real_escape_string($username));
+    $rs = $conn->query($query);
+    if ($rs && $rs->num_rows == 1) {
+      $fila = $rs->fetch_assoc();
+      $user = new Usuario($fila['id'], $fila['username'], $fila['password'], $fila['Descripcion'], $fila['Email'],$fila['FechaNac'], $fila['imagenPerfil']);
+      $rs->free();
+
+      return $user;
+    }
+    return false;
+  }
+
+  public static function buscaEmail($email) {
+    $app = App::getSingleton();
+    $conn = $app->conexionBd();
+    $query = sprintf("SELECT * FROM usuarios WHERE Email='%s'", $conn->real_escape_string($email));
     $rs = $conn->query($query);
     if ($rs && $rs->num_rows == 1) {
       $fila = $rs->fetch_assoc();
@@ -109,6 +124,38 @@ public static function registro($username, $password,$email,$fechaNac,$descripci
     }
   }
  
+
+  public static function modPass ($nuevaPass)
+  {
+    $user = self::buscaUsuario($_SESSION['username']);
+    if ($user) {
+        $app = App::getSingleton();
+        $conn = $app->conexionBd();
+
+        //$pass = password_hash($nuevaPass, PASSWORD_DEFAULT); 
+        $reg = sprintf("UPDATE usuarios U SET password='%s' WHERE '%s' = U.id"
+        , password_hash($nuevaPass, PASSWORD_DEFAULT)
+        , $conn->real_escape_string($user->id) );
+
+
+        if ($conn->query($reg) === TRUE)
+        {
+            $user->password = password_hash($nuevaPass, PASSWORD_DEFAULT);
+            echo "<br />" . "<h2>" . "Contraseña modificada exitosamente!" . "</h2>";
+        }
+        else
+        {
+            echo "Error: (" . $conn->errno . ") ";
+            return false;
+        }
+        return $user;
+    }
+    else {
+        //error fatal: usuario no encontrado
+        return false;
+    }
+  }
+
   private $id;
 
   private $username;
@@ -176,7 +223,7 @@ public static function registro($username, $password,$email,$fechaNac,$descripci
     return password_verify($password, $this->password);
   }
 
-  public function cambiaPassword($nuevoPassword) {
+  /*public function cambiaPassword($nuevoPassword) {
     $this->password = password_hash($nuevoPassword, PASSWORD_DEFAULT);
-  }
+  }*/
 }

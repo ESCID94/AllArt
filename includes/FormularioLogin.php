@@ -36,10 +36,10 @@ EOF;
     $result = array();
     $ok = true;
     $username = isset($datos['username']) ? $datos['username'] : null ;
-    /*if ( !$username ) {
-     $result[] = 'El nombre de usuario no es válido';
-      $ok = false;
-    }*/
+    if ( !$username ) {
+        $result[] = 'El nombre de usuario no es válido';
+        $ok = false;
+    }
 
     $password = isset($datos['password']) ? $datos['password'] : null ;
     if ( ! $password ||  mb_strlen($password) < 4 ) {
@@ -49,7 +49,7 @@ EOF;
 
     if ( $ok ) {
       $user = Usuario::login($username, $password);
-      echo '$user';
+      //echo '$user';
       if ( $user ) {
         // SEGURIDAD: Forzamos que se genere una nueva cookie de sesión por si la han capturado antes de hacer login
         session_regenerate_id(true);

@@ -47,7 +47,7 @@ EOF;
     }
 	 else
 	 {
-	   $user = Usuario::login($username, $password);	  
+	   $user = Usuario::login($datos['username'], $datos['password']);	  
 	   if ( $user ) 
 	   {	  
         // SEGURIDAD: Forzamos que se genere una nueva cookie de sesión por si la han capturado antes de hacer login

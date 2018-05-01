@@ -97,6 +97,10 @@ class Aplicacion {
     return isset($_SESSION['username']) ? $_SESSION['username'] : '';
   }
 
+  public function emailUsuario() {
+    return isset($_SESSION['email']) ? $_SESSION['email'] : '';
+  }
+
   public function conexionBd() {
     if (! $this->conn ) {
       $bdHost = $this->bdDatosConexion['host'];
