@@ -33,6 +33,9 @@ $app->doInclude('comun/sidebarIzq.php');
             
             $URLPassMod =  $app->resuelve('/modPass.php');
 			echo '<input type="button" value="Modificar contraseña" onclick="location.href=\'' . $URLPassMod . '\'"/>';
+
+            $URLPassMod =  $app->resuelve('/modImagen.php');
+			echo '<input type="button" value="Modificar imagen" onclick="location.href=\'' . $URLPassMod . '\'"/>';
 		?>
 	</div>
 <?php

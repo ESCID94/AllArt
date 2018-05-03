@@ -161,6 +161,38 @@ public static function registro($username, $password,$email,$fechaNac,$descripci
     }
   }
 
+  public static function modImagen ($nuevaImagen)
+  {
+    $user = self::buscaUsuario($_SESSION['username']);
+    if ($user) {
+        $app = App::getSingleton();
+        $conn = $app->conexionBd();
+
+        //TO-DO: Introducir funcionalidad
+
+        /*$reg = sprintf("UPDATE usuarios U SET password='%s' WHERE '%s' = U.id"
+        , password_hash($nuevaPass, PASSWORD_DEFAULT)
+        , $conn->real_escape_string($user->id) );
+
+
+        if ($conn->query($reg) === TRUE)
+        {
+            $user->password = password_hash($nuevaPass, PASSWORD_DEFAULT);
+            echo "<br />" . "<h2>" . "Contraseña modificada exitosamente!" . "</h2>";
+        }
+        else
+        {
+            echo "Error: (" . $conn->errno . ") ";
+            return false;
+        }*/
+        return $user;
+    }
+    else {
+        //error fatal: usuario no encontrado
+        return false;
+    }
+  }
+
   private $id;
 
   private $username;
