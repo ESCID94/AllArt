@@ -32,12 +32,18 @@ $app->doInclude('comun/sidebarIzq.php');
 			echo "Fecha nacimiento: " . $usuario->fechaNac();
 			echo "</br>";
 
+			$id = $usuario->id();
 
-			/*$URLMod =  $app->resuelve('/modPerfil.php');
-			echo '<input type="button" value="Modificar perfil" onclick="location.href=\'' . $URLMod . '\'"/>';
-            
-            $URLPassMod =  $app->resuelve('/modPass.php');
-			echo '<input type="button" value="Modificar contraseña" onclick="location.href=\'' . $URLPassMod . '\'"/>';*/
+			$img = archivo::buscarImagenDest($id);
+
+			$ruta = $img->ruta();
+
+			echo "Imagen destacada: ";
+
+			echo "<img src= '" . $ruta . "' border='0' width='300' height='300'>";
+
+
+			
 		?>
 	</div>
 <?php
