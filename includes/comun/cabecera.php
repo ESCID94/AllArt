@@ -1,6 +1,8 @@
 <?php
 use es\ucm\fdi\aw;
 
+$app = aw\Aplicacion::getSingleton();
+
 function mostrarSaludo() {
   $html = '';
   $app = aw\Aplicacion::getSingleton();
@@ -19,10 +21,21 @@ function mostrarSaludo() {
 }
 
 ?>
-<div id="cabecera">
-	<img src="img/logoAllArt.png" alt="Logo AllArt">
+<div id="header">
+	<div class="logo">
+	<h1><a href="<?= $app->resuelve('/index.php')?>">*Art</a></h1>
+	</div>	
 	<div class="saludo">
 	  <?=	mostrarSaludo() ?>
 	</div>
-</div>
 
+	<ul class="nav">
+		<a href="#musica">Música</a>
+  		<a href="#pintura">Pintura</a>
+ 		<a href="#videos">Videos</a>
+ 		<a href="#escritos">Escritos</a>
+  		<a href="#patrocinadores">Patrocinadores</a>
+	
+		<input type = "text" placeholder = "Search..">
+	</ul>
+	</div>
