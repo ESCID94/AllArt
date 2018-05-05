@@ -14,7 +14,8 @@ require_once __DIR__.'/includes/config.php';
 <body>
 <div id="contenedor">
 <?php
-$nombreUsuario=htmlspecialchars(trim(strip_tags($_GET['usuario'])));
+//$nombreUsuario=htmlspecialchars(trim(strip_tags($_GET['usuario'])));
+$nombreUsuario = 'alvant01';
 $usuario=Usuario::buscaUsuario($nombreUsuario);
 $app->doInclude('comun/cabecera.php');
 $app->doInclude('comun/sidebarIzq.php');
@@ -35,13 +36,40 @@ $app->doInclude('comun/sidebarIzq.php');
 			$id = $usuario->id();
 
 			$img = archivo::buscarImagenDest($id);
+			if ($img !== FALSE)
+			{
+				$ruta = $img->ruta();
 
-			$ruta = $img->ruta();
+				echo "Imagen destacada: ";
 
-			echo "Imagen destacada: ";
+				echo "<img src= '" . $ruta . "' border='0' width='300' height='300'>";
+			}
+			else
+			{
+				echo $usuario->username() . " no tiene ninguna imagen destacada.";
+			}
 
-			echo "<img src= '" . $ruta . "' border='0' width='300' height='300'>";
 
+
+			$arch = archivo::buscarMejoresArch($id);
+
+			if ($arch !== FALSE)
+			{
+				$ite = 0;
+				foreach($arch as $value)
+				{
+
+					if ($arch[$ite]  !== NULL)
+					{
+						//$img = $arch[$ite];
+						$ruta = $value->ruta();
+						echo "<img src= '" . $ruta . "' border='0' width='300' height='300'>";
+						$ite++;
+					}			
+				}
+
+
+			}
 
 			
 		?>
