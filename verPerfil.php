@@ -55,11 +55,19 @@ $app->doInclude('comun/sidebarIzq.php');
 			if ($arch !== FALSE)
 			{
 				$ite = 0;
-				foreach($arch as $value)
+				foreach($arch as $value )
 				{
+					if ($ite == 10)
+					{
+						break;
+					}
 					$img = (object) $arch[$ite];
 					$ite++;
 					echo "<img src= '" . $img->ruta . "' border='0' width='100' height='100'>";
+					if ($ite == 4)
+					{
+						echo "</br>";
+					}
 				}
 			}
 			
