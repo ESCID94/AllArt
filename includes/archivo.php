@@ -32,6 +32,11 @@ class Archivo
 	}
 
 
+
+
+
+
+
 		public static function buscarImagenDest($idAutor)
 	{
 		$app = App::getSingleton();
@@ -51,6 +56,28 @@ class Archivo
     	}
     	return false;
 	}
+
+
+	public static function buscarMejoresArch($idAutor)
+ 	{
+ 		$app = App::getSingleton();
+   		$conn = $app->conexionBd();
+    	$query = sprintf("SELECT * FROM archivo A WHERE A.autor='%s' ORDER BY A.punt ASC", $conn->real_escape_string($idAutor));
+		$rs = $conn->query($query);
+
+		if ($rs)
+		{
+			$archivos = array();
+
+
+			while($row = $rs->fetch_assoc()) 
+			{
+   				$results[] = $row;
+			}
+			return $results;
+		}
+		return false;
+ 	}
 
 
 	public function ruta()
