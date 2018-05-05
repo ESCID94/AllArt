@@ -14,8 +14,7 @@ require_once __DIR__.'/includes/config.php';
 <body>
 <div id="contenedor">
 <?php
-//$nombreUsuario=htmlspecialchars(trim(strip_tags($_GET['usuario'])));
-$nombreUsuario = 'alvant01';
+$nombreUsuario=htmlspecialchars(trim(strip_tags($_GET['usuario'])));
 $usuario=Usuario::buscaUsuario($nombreUsuario);
 $app->doInclude('comun/cabecera.php');
 $app->doInclude('comun/sidebarIzq.php');
@@ -58,19 +57,11 @@ $app->doInclude('comun/sidebarIzq.php');
 				$ite = 0;
 				foreach($arch as $value)
 				{
-
-					if ($arch[$ite]  !== NULL)
-					{
-						//$img = $arch[$ite];
-						$ruta = $value->ruta();
-						echo "<img src= '" . $ruta . "' border='0' width='300' height='300'>";
-						$ite++;
-					}			
+					$img = (object) $arch[$ite];
+					$ite++;
+					echo "<img src= '" . $img->ruta . "' border='0' width='100' height='100'>";
 				}
-
-
 			}
-
 			
 		?>
 	</div>
