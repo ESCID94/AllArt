@@ -16,7 +16,8 @@ $app->doInclude('comun/sidebarIzq.php');
 ?>
 	<div id="contenido">
     <?php 
-    	$formModPerfil = new \es\ucm\fdi\aw\FormularioModImagen();
+        $opciones = array( 'ajax' => false, 'action' => null, 'class' => null, 'enctype' => "multipart/form-data" );
+    	$formModPerfil = new \es\ucm\fdi\aw\FormularioModImagen($opciones);
 	 	$formModPerfil->gestiona();
 	 ?>
 	</div>
