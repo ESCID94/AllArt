@@ -38,7 +38,7 @@ class editProfile extends Form {
 
     $camposFormulario=<<<EOF
 		<fieldset>
-		  <legend>Usuario y contraseña</legend>
+		  <legend>Usuario y contraseÃ±a</legend>
 		  <p><label>Name:</label> <input type="text" name="username" value="$username"/></p>
 		  <p><label>Password:</label> <input type="password" name="password" value="$password"/><br /></p>
 		  <p><label>Email:</label> <input type="email" name="email" value="$email"/><br /></p>
@@ -56,31 +56,31 @@ EOF;
     $ok = true;
     $username = isset($datos['username']) ? $datos['username'] : null ;
     if ( !$username || ! mb_ereg_match(self::HTML5_EMAIL_REGEXP, $username) ) {
-      $result[] = 'El nombre de usuario no es válido';
+      $result[] = 'El nombre de usuario no es vÃ¡lido';
       $ok = false;
     }
 
     $password = isset($datos['password']) ? $datos['password'] : null ;
     if ( ! $password ||  mb_strlen($password) < 4 ) {
-      $result[] = 'La contraseña no es válida';
+      $result[] = 'La contraseÃ±a no es vÃ¡lida';
       $ok = false;
     }
 
     $email = isset($datos['email']) ? $datos['email'] : null ;
     if ( ! $email ||  !filter_var($email, FILTER_VALIDATE_EMAIL)) { 
-      $result[] = 'El email no es válido';
+      $result[] = 'El email no es vÃ¡lido';
       $ok = false;
     }
 
     if ( $ok ) {
       $user = Usuario::login($username, $password);
       if ( $user ) {
-        // SEGURIDAD: Forzamos que se genere una nueva cookie de sesión por si la han capturado antes de hacer login
+        // SEGURIDAD: Forzamos que se genere una nueva cookie de sesiÃ³n por si la han capturado antes de hacer login
         session_regenerate_id(true);
         Aplicacion::getSingleton()->login($user);
         $result = \es\ucm\fdi\aw\Aplicacion::getSingleton()->resuelve('/index.php');
       }else {
-        $result[] = 'El usuario o la contraseña es incorrecta';
+        $result[] = 'El usuario o la contraseÃ±a es incorrecta';
       }
     }
     return $result;
