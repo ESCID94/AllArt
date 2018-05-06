@@ -89,6 +89,11 @@ class Aplicacion {
     $_SESSION['fechaNac'] = $user->fechaNac();
   }
 
+  public function modImagen(Usuario $user) {
+
+    $_SESSION['imgPerfil'] = $user->imgPerfil();
+  }
+
   public function usuarioLogueado() {
     return isset($_SESSION["login"]) && ($_SESSION["login"]===true);
   }

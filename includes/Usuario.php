@@ -170,21 +170,23 @@ public static function registro($username, $password,$email,$fechaNac,$descripci
 
         //TO-DO: Introducir funcionalidad
 
-        /*$reg = sprintf("UPDATE usuarios U SET password='%s' WHERE '%s' = U.id"
-        , password_hash($nuevaPass, PASSWORD_DEFAULT)
+        $reg = sprintf("UPDATE usuarios U SET imagenPerfil='%s' WHERE '%s' = U.id"
+        , $conn->real_escape_string($nuevaImagen)
         , $conn->real_escape_string($user->id) );
 
 
         if ($conn->query($reg) === TRUE)
         {
-            $user->password = password_hash($nuevaPass, PASSWORD_DEFAULT);
-            echo "<br />" . "<h2>" . "Contraseña modificada exitosamente!" . "</h2>";
+            $user->imgPerfil = $conn->real_escape_string($nuevaImagen);
+            echo "<br />" . "<h2>" . "Imagen modificada exitosamente!" . "</h2>";
         }
         else
         {
             echo "Error: (" . $conn->errno . ") ";
             return false;
-        }*/
+        }
+
+        
         return $user;
     }
     else {
