@@ -13,7 +13,7 @@ $app = aw\Aplicacion::getSingleton();
 		<input type="checkbox" name="ordena" value="menor a mayor"> Menor a mayor precio<br>
 		<br/>
 		<br/>
-		<input type="checkbox" name="ordena" value="valorados"> Más valorados<br>
+		<input type="checkbox" name="ordena" value="valorados"> MÃ¡s valorados<br>
 		
 		
 	</ul>
