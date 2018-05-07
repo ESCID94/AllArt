@@ -7,24 +7,19 @@ function mostrarSaludo() {
   $html = '';
   $app = aw\Aplicacion::getSingleton();
   if ($app->usuarioLogueado()) {
-    $nombreUsuario = $app->nombreUsuario();
-    $logoutUrl = $app->resuelve('/logout.php');
-    $perfilUrl = $app->resuelve('/Perfil.php');
-    $html = "Bienvenido,<a href='${perfilUrl}'>(${nombreUsuario})</a>.<a href='${logoutUrl}'>(salir)</a>";
-  } else {
-    $loginUrl = $app->resuelve('/login.php');
-    $RegistroUrl = $app->resuelve('/registro.php');
-    $html = "Usuario desconocido. <a href='${loginUrl}'>Login</a>/<a href='${RegistroUrl}'>Registrarse</a>";
-  }
+     } else {
+      }
 
   return $html;
 }
 
 ?>
+
+
 <div id="header">
 
 	<div class="logo">
-	<h1><a href=/allart/index.php id="logo"><img src="img/allartslogo.jpg"></a></h1>
+	<h1><a href="/allart/index.php" id="logo"><img src="img/allartslogo.jpg"></a></h1>
 	</div>	
 	<div class="saludo">
 		<img src="img/avatar.jpg">
@@ -40,4 +35,24 @@ function mostrarSaludo() {
   			
 		<input type = "text" placeholder = "Search..">
 	</ul>
-	</div>
+	
+
+
+
+	
+	<ul class="topnav">
+
+
+		<a href="<?= $app->resuelve('/home.php')?>">Home</a>
+		<a href="<?= $app->resuelve('/Perfil.php')?>">Mi Perfil</a>
+		<a href="<?= $app->resuelve('/seguidos.php')?>">Seguidos</a>
+		<a href="<?= $app->resuelve('/subidos.php')?>">Archivos Subidos</a>
+		<a href="<?= $app->resuelve('/destacados.php')?>">Mis Destacados</a>
+		<a href="<?= $app->resuelve('/compras.php')?>">Mis Compras</a>
+  			
+		
+		</ul>
+
+
+</div>
+
