@@ -10,7 +10,9 @@ function mostrarSaludo() {
     $nombreUsuario = $app->nombreUsuario();
     $logoutUrl = $app->resuelve('/logout.php');
     $perfilUrl = $app->resuelve('/Perfil.php');
-    $html = "Bienvenido,<a href='${perfilUrl}'>(${nombreUsuario})</a>.<a href='${logoutUrl}'>(salir)</a>";
+    $imagen = "<img src='" . $_SESSION['imgPerfil'] . "' border='0' width='100' height='100'>";
+    $saludo = "Bienvenido,<a href='${perfilUrl}'>(${nombreUsuario})</a>.<a href='${logoutUrl}'>(salir)</a>";
+    $html = $imagen . $saludo;
   } else {
     $loginUrl = $app->resuelve('/login.php');
     $RegistroUrl = $app->resuelve('/registro.php');
@@ -21,13 +23,14 @@ function mostrarSaludo() {
 }
 
 ?>
+
+
 <div id="header">
 
 	<div class="logo">
-	<h1><a href=/allart/index.php id="logo"><img src="img/allartslogo.jpg"></a></h1>
+	<h1><a href="/allart/index.php" id="logo"><img src="img/allartslogo.jpg"></a></h1>
 	</div>	
 	<div class="saludo">
-		<img src="img/avatar.jpg">
 	  <?=mostrarSaludo() ?>
 	</div>
 
@@ -40,4 +43,16 @@ function mostrarSaludo() {
   			
 		<input type = "text" placeholder = "Search..">
 	</ul>
-	</div>
+	
+
+
+<?php
+    
+	if($app->usuarioLogueado()) {
+    $app->doInclude('comun/cabeceraPerfil.php');
+	
+    }else{}
+
+?>
+</div>
+
