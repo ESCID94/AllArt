@@ -54,7 +54,7 @@ EOF;
         // SEGURIDAD: Forzamos que se genere una nueva cookie de sesión por si la han capturado antes de hacer login
         session_regenerate_id(true);
         Aplicacion::getSingleton()->login($user);
-        $result = \es\ucm\fdi\aw\Aplicacion::getSingleton()->resuelve('/index.php');
+        $result = \es\ucm\fdi\aw\Aplicacion::getSingleton()->resuelve('/home.php');
 
       }else {
         $result[] = 'El usuario o la contraseña es incorrecta';

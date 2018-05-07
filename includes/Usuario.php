@@ -50,7 +50,7 @@ public static function registro($username, $password,$email,$fechaNac,$descripci
           , $conn->real_escape_string($email)
           , $fechaNac
           , $conn->real_escape_string($descripcion)
-          , 'img/imgBasica.jpg');
+          , 'img/avatar.jpg');
       if ($conn->query($reg)=== TRUE)
 		  {
 			 echo "<br />" . "<h2>" . "Usuario Creado Exitosamente!" . "</h2>";

@@ -7,8 +7,17 @@ function mostrarSaludo() {
   $html = '';
   $app = aw\Aplicacion::getSingleton();
   if ($app->usuarioLogueado()) {
-     } else {
-      }
+    $nombreUsuario = $app->nombreUsuario();
+    $logoutUrl = $app->resuelve('/logout.php');
+    $perfilUrl = $app->resuelve('/Perfil.php');
+    $imagen = "<img src='" . $_SESSION['imgPerfil'] . "' border='0' width='100' height='100'>";
+    $saludo = "Bienvenido,<a href='${perfilUrl}'>(${nombreUsuario})</a>.<a href='${logoutUrl}'>(salir)</a>";
+    $html = $imagen . $saludo;
+  } else {
+    $loginUrl = $app->resuelve('/login.php');
+    $RegistroUrl = $app->resuelve('/registro.php');
+    $html = "Usuario desconocido. <a href='${loginUrl}'>Login</a>/<a href='${RegistroUrl}'>Registrarse</a>";
+  }
 
   return $html;
 }
@@ -22,7 +31,6 @@ function mostrarSaludo() {
 	<h1><a href="/allart/index.php" id="logo"><img src="img/allartslogo.jpg"></a></h1>
 	</div>	
 	<div class="saludo">
-		<img src="img/avatar.jpg">
 	  <?=mostrarSaludo() ?>
 	</div>
 

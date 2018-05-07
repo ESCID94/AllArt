@@ -28,8 +28,9 @@ EOF;
     $result = array();
     $ok = true;
     $dir_subida1 = '/var/www/html/allart/img/';
+    $dir_subida1b = '/opt/lampp/htdocs/allart/img/';
     $dir_subida2 = 'img/';
-    $imagen_subida1 = $dir_subida1 . basename($_FILES['nuevaImagen']['name']);
+    $imagen_subida1 = $dir_subida1b . basename($_FILES['nuevaImagen']['name']);
     $imagen_subida2 = $dir_subida2 . basename($_FILES['nuevaImagen']['name']);
     //  echo $_FILES['nuevaImagen']['name'];
 
@@ -50,10 +51,10 @@ EOF;
 
     //Ejemplo basado en http://php.net/manual/es/features.file-upload.post-method.php
     if (!move_uploaded_file($_FILES['nuevaImagen']['tmp_name'], $imagen_subida1)) { //cambiar a elseif si se habilita el if de finfo
-        $result[] = '¡Posible ataque de subida de ficheros!\n';
+        $result[] = '¡Posible ataque de subida de ficheros!';
         $ok = false;
     } else {
-        $result[] = 'La imagen es válida y se subió con éxito.\n';
+        $result[] = 'La imagen es válida y se subió con éxito.';
     }
     
     

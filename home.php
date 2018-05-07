@@ -12,7 +12,7 @@ require_once __DIR__.'/includes/config.php';
 <body>
 <div id="contenedor">
 <?php
-$app->doInclude('comun/cabeceraPerfil.php');
+$app->doInclude('comun/cabecPerfil.php');
 $app->doInclude('comun/sidebarIzq.php');
 ?>
 	<div id="contenido">
