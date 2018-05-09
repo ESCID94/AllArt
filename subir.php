@@ -7,7 +7,7 @@ require_once __DIR__.'/includes/config.php';
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <link rel="stylesheet" type="text/css" href="<?= $app->resuelve('/css/style.css') ?>" />
-  <title>Admin</title>
+  <title>*Art</title>
 </head>
 <body>
 <div id="contenedor">
@@ -16,19 +16,14 @@ $app->doInclude('comun/cabecera.php');
 $app->doInclude('comun/sidebarIzq.php');
 ?>
 	<div id="contenido">
-<?php
-
-if ($app->tieneRol('admin', 'Acceso Denegado', 'No tienes permisos suficientes para administrar la web.')) {
-
-?>
-		<h1>Consola de administración</h1>
-		<p>Aquí estarían todos los controles de administración</p>
-<?php
-}
-?>
+		<div class="upload-btn-wrapper">
+		<form enctype="multipart/form-data" action="uploader.php" method="POST">
+		<input name="uploadedfile" class="btn" type="file" />
+		<input type="submit" class="btn" value="Subir archivo" />
+		</form>
+		</div>
 	</div>
 <?php
-$app->doInclude('comun/sidebarDer.php');
 $app->doInclude('comun/pie.php');
 ?>
 </div>

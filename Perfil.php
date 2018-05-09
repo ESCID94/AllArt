@@ -1,13 +1,8 @@
 <?php
 
-//Inicio del procesamiento
-session_start();
-
-
 require_once __DIR__.'/includes/config.php';
 
-?>
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -21,21 +16,29 @@ $app->doInclude('comun/cabecera.php');
 $app->doInclude('comun/sidebarIzq.php');
 ?>
 	<div id="contenido">
-		<h1>Acceso al sistema</h1>
-		<p> Hola </p>
-    <?php		
-			echo "$_SESSION[username]";
-			//echo "\n";
-			echo "$_SESSION[email]";
-			//echo "\n";
-			echo "$_SESSION[descripcion]";
-	?>
+    	<?php		
+			echo "<img src='$_SESSION[imgPerfil]' border='0' width='100' height='100'>";
+			echo "</br>";
+			echo "Nombre: " . "$_SESSION[username]";
+			echo "</br>";
+			echo "Email: " . "$_SESSION[email]";
+			echo "</br>";
+			echo "Descripción: " . "$_SESSION[descripcion]";
+			echo "</br>";
+			echo "Fecha nacimiento: " . " $_SESSION[fechaNac]";
+			echo "</br>";
 
+			$URLMod =  $app->resuelve('/modPerfil.php');
+			echo '<input type="button" value="Modificar perfil" onclick="location.href=\'' . $URLMod . '\'"/>';
+            
+            $URLPassMod =  $app->resuelve('/modPass.php');
+			echo '<input type="button" value="Modificar contraseña" onclick="location.href=\'' . $URLPassMod . '\'"/>';
 
-
+            $URLPassMod =  $app->resuelve('/modImagen.php');
+			echo '<input type="button" value="Modificar imagen" onclick="location.href=\'' . $URLPassMod . '\'"/>';
+		?>
 	</div>
 <?php
-$app->doInclude('comun/sidebarDer.php');
 $app->doInclude('comun/pie.php');
 ?>
 </div>
