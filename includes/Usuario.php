@@ -50,7 +50,7 @@ public static function registro($username, $password,$email,$fechaNac,$descripci
           , $conn->real_escape_string($email)
           , $fechaNac
           , $conn->real_escape_string($descripcion)
-          , 'img/avatar.jpg');
+          , 'img/imgBasica.jpg');
       if ($conn->query($reg)=== TRUE)
 		  {
 			 echo "<br />" . "<h2>" . "Usuario Creado Exitosamente!" . "</h2>";
@@ -67,6 +67,22 @@ public static function registro($username, $password,$email,$fechaNac,$descripci
     $app = App::getSingleton();
     $conn = $app->conexionBd();
     $query = sprintf("SELECT * FROM usuarios WHERE username='%s'", $conn->real_escape_string($username));
+    $rs = $conn->query($query);
+    if ($rs && $rs->num_rows == 1) {
+      $fila = $rs->fetch_assoc();
+      $user = new Usuario($fila['id'], $fila['username'], $fila['password'], $fila['Descripcion'], $fila['Email'],$fila['FechaNac'], $fila['imagenPerfil']);
+      $rs->free();
+
+      return $user;
+    }
+    return false;
+  }
+
+  public static function buscaUsuarioById($id)
+  {
+    $app = App::getSingleton();
+    $conn = $app->conexionBd();
+    $query = sprintf("SELECT * FROM usuarios WHERE id='%s'", $conn->real_escape_string($id));
     $rs = $conn->query($query);
     if ($rs && $rs->num_rows == 1) {
       $fila = $rs->fetch_assoc();
