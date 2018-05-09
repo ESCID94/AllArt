@@ -19,9 +19,6 @@ $app->doInclude('comun/sidebarIzq.php');
     	<?php		
 			echo "<img src='$_SESSION[imgPerfil]' border='0' width='100' height='100'>";
 			echo "</br>";
-            $URLPassMod =  $app->resuelve('/modImagen.php');
-			echo '<input type="button" value="Modificar imagen de perfil" onclick="location.href=\'' . $URLPassMod . '\'"/>';
-            echo "</br>";
 			echo "Nombre: " . "$_SESSION[username]";
 			echo "</br>";
 			echo "Email: " . "$_SESSION[email]";
@@ -32,12 +29,13 @@ $app->doInclude('comun/sidebarIzq.php');
 			echo "</br>";
 
 			$URLMod =  $app->resuelve('/modPerfil.php');
-			echo '<input type="button" value="Modificar perfil" onclick="location.href=\'' . $URLMod . '\'"/></br>';
+			echo '<input type="button" value="Modificar perfil" onclick="location.href=\'' . $URLMod . '\'"/>';
             
             $URLPassMod =  $app->resuelve('/modPass.php');
 			echo '<input type="button" value="Modificar contraseña" onclick="location.href=\'' . $URLPassMod . '\'"/>';
 
-            
+            $URLPassMod =  $app->resuelve('/modImagen.php');
+			echo '<input type="button" value="Modificar imagen" onclick="location.href=\'' . $URLPassMod . '\'"/>';
 		?>
 	</div>
 <?php

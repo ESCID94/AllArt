@@ -14,10 +14,10 @@ require_once __DIR__.'/includes/config.php';
 <body>
 <div id="contenedor">
 <?php
-$app->doInclude('comun/cabecera.php');
-$app->doInclude('comun/sidebarIzq.php');
 $nombreUsuario=htmlspecialchars(trim(strip_tags($_GET['usuario'])));
 $usuario=Usuario::buscaUsuario($nombreUsuario);
+$app->doInclude('comun/cabecera.php');
+$app->doInclude('comun/sidebarIzq.php');
 ?>
 	<div id="contenido">
     	<?php

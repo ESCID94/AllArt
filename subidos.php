@@ -16,10 +16,7 @@ $app->doInclude('comun/cabecera.php');
 
 ?>
 	<div id="contenido">
-            <?php
-            $URLPassMod =  $app->resuelve('/subir.php');
-			echo '<input type="button" value="Subir archivo" onclick="location.href=\'' . $URLPassMod . '\'"/>';
-            ?>
+
 
 	</div>
 <?php
