@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/Aplicacion.php';
+//Modificado
 
 namespace es\ucm\fdi\aw;
 
@@ -47,10 +47,10 @@ EOF;
     }
 	 else
 	 {
-	   $user = Usuario::login($username, $password);	  
+	   $user = Usuario::login($datos['username'], $datos['password']);	  
 	   if ( $user ) 
 	   {	  
-        // SEGURIDAD: Forzamos que se genere una nueva cookie de sesión por si la han capturado antes de hacer login
+        // SEGURIDAD: Forzamos que se genere una nueva cookie de sesiÃ³n por si la han capturado antes de hacer login
         session_regenerate_id(true);
         Aplicacion::getSingleton()->login($user);
         $result = \es\ucm\fdi\aw\Aplicacion::getSingleton()->resuelve('/index.php');

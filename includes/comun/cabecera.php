@@ -1,6 +1,8 @@
 <?php
 use es\ucm\fdi\aw;
 
+$app = aw\Aplicacion::getSingleton();
+
 function mostrarSaludo() {
   $html = '';
   $app = aw\Aplicacion::getSingleton();
@@ -8,7 +10,9 @@ function mostrarSaludo() {
     $nombreUsuario = $app->nombreUsuario();
     $logoutUrl = $app->resuelve('/logout.php');
     $perfilUrl = $app->resuelve('/Perfil.php');
-    $html = "Bienvenido,<a href='${perfilUrl}'>(${nombreUsuario})</a>.<a href='${logoutUrl}'>(salir)</a>";
+    $imagen = "<img src='" . $_SESSION['imgPerfil'] . "' border='0' width='100' height='100'>";
+    $saludo = "Bienvenido,<a href='${perfilUrl}'>(${nombreUsuario})</a>.<a href='${logoutUrl}'>(salir)</a>";
+    $html = $imagen . $saludo;
   } else {
     $loginUrl = $app->resuelve('/login.php');
     $RegistroUrl = $app->resuelve('/registro.php');
@@ -19,10 +23,36 @@ function mostrarSaludo() {
 }
 
 ?>
-<div id="cabecera">
-	<h1>*Art</h1>
+
+
+<div id="header">
+
+	<div class="logo">
+	<h1><a href="/allart/index.php" id="logo"><img src="img/allartslogo.jpg"></a></h1>
+	</div>	
 	<div class="saludo">
-	  <?=	mostrarSaludo() ?>
+	  <?=mostrarSaludo() ?>
 	</div>
+
+	<ul class="topnav">
+		<a href="<?= $app->resuelve('/musica.php')?>">Música</a>
+		<a href="<?= $app->resuelve('/pintura.php')?>">Pintura</a>
+		<a href="<?= $app->resuelve('/videos.php')?>">Videos</a>
+		<a href="<?= $app->resuelve('/escritos.php')?>">Escritos</a>
+		<a href="<?= $app->resuelve('/patrocinadores.php')?>">Patrocinadores</a>
+  			
+		<input type = "text" placeholder = "Search..">
+	</ul>
+	
+
+
+<?php
+    
+	if($app->usuarioLogueado()) {
+    $app->doInclude('comun/cabeceraPerfil.php');
+	
+    }else{}
+
+?>
 </div>
 
