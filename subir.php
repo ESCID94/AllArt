@@ -1,5 +1,4 @@
 <?php
-
 require_once __DIR__.'/includes/config.php';
 
 ?><!DOCTYPE html>
@@ -14,11 +13,12 @@ require_once __DIR__.'/includes/config.php';
 <?php
 $app->doInclude('comun/cabecera.php');
 ?>
-	<div id="contenido">
-		<form enctype="multipart/form-data" action="uploader.php" method="POST">
-		<input name="uploadedfile" type="file" />
-		<input type="submit" value="Subir archivo" />
-		</form>
+    <div id="contenido">
+    <?php 
+        $opciones = array( 'ajax' => false, 'action' => null, 'class' => null, 'enctype' => "multipart/form-data" );
+    	$formModPerfil = new \es\ucm\fdi\aw\FormularioSubir($opciones);
+	 	$formModPerfil->gestiona();
+	 ?>
 	</div>
 <?php
 $app->doInclude('comun/pie.php');
