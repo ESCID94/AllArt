@@ -55,7 +55,7 @@ class Archivo
     	if ($rs && $rs->num_rows == 1) 
     	{
     		$fila = $rs->fetch_assoc();
-      		$img = new archivo($fila['id'], $fila['nombre'],$fila['descripcion'], $fila['autor'], $fila['imgDest'], $fila['punt'], $fila['ruta'],$fila['precio']);
+      		$img = new archivo($fila['id'], $fila['nombre'],$fila['Descripcion'], $fila['autor'], $fila['imgDest'], $fila['punt'], $fila['ruta'],$fila['Precio']);
       		$rs->free();
 
       		return $img;
@@ -97,7 +97,7 @@ class Archivo
 		{
 			$fila = $rs->fetch_assoc();
 			echo $fila['punt'];
-      		$arch = new archivo($fila['id'], $fila['nombre'],$fila['descripcion'], $fila['autor'], $fila['imgDest'], $fila['punt'], $fila['ruta'],$fila['precio']);
+      		$arch = new archivo($fila['id'], $fila['nombre'],$fila['Descripcion'], $fila['autor'], $fila['imgDest'], $fila['punt'], $fila['ruta'],$fila['Precio']);
       		$rs->free();
 
       		return $arch;
@@ -137,6 +137,10 @@ class Archivo
  	public function precio()
  	{
  		return $this->precio;
+ 	}
+ 	public function id()
+ 	{
+ 		return $this->id;
  	}
 }
 
