@@ -19,8 +19,8 @@ require_once __DIR__.'/includes/config.php';
 
 $app->doInclude('comun/cabecera.php');
 $app->doInclude('comun/sidebarIzq.php');
-//$idArchivo=htmlspecialchars(trim(strip_tags($_GET['archivo'])));
-$idArchivo = '1';
+$idArchivo=htmlspecialchars(trim(strip_tags($_GET['archivo'])));
+
 $archivo=archivo::buscaArchivo($idArchivo);
 ?>
 	<div id="contenido">

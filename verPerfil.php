@@ -42,6 +42,7 @@ $app->doInclude('comun/sidebarIzq.php');
 				echo "Imagen destacada: ";
 
 				echo "<img src= '" . $ruta . "' border='0' width='300' height='300'>";
+				echo "</br>";
 			}
 			else
 			{
@@ -51,7 +52,6 @@ $app->doInclude('comun/sidebarIzq.php');
 
 
 			$arch = archivo::buscarMejoresArch($id);
-
 			if ($arch !== FALSE)
 			{
 				$ite = 0;
