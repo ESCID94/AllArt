@@ -1,6 +1,8 @@
 <?php
 
 namespace es\ucm\fdi\aw;
+
+use es\ucm\fdi\aw\Comentario as Com;
 require_once __DIR__.'/includes/config.php';
 
 
@@ -35,7 +37,53 @@ $archivo=archivo::buscaArchivo($idArchivo);
 			echo "</br>";
 			echo "Precio: " . $archivo->precio();
 			echo "</br>";
-		?>
+			?>
+     		<p> 
+			<FORM NAME="miFormu" ACTION="comentarios.php" METHOD="post"> 
+				<?php
+					$id_Arch  = $archivo->id();
+				?>
+			<INPUT TYPE="hidden" NAME="id" VALUE="<?= $id_Arch ?>">
+				<?php
+					$userComment  = $_SESSION['username'];
+				?>
+			<INPUT TYPE="hidden" NAME="user" VALUE = "<?= $userComment ?>">
+			Comentario: <INPUT TYPE="text" NAME="comentario" SIZE=100 MAXLENGTH=500> 
+			<BR> 
+			<INPUT TYPE="submit" CLASS="boton" VALUE="Comentar"> 
+			</FORM>
+
+			<?php 
+			$ID = $archivo->id();
+
+			$comments = Comentario::verComentarios($ID);
+
+			if ($comments !== FALSE)
+			{
+				$ite = 0;
+				foreach($comments as $value)
+				{
+					$comentario = (object) $comments[$ite];
+					$ite++;
+
+					$autor = Usuario::buscaUsuarioById($comentario->Autor);
+					echo "</br>";
+					echo $autor->username();
+					echo $comentario->Fecha;
+					echo "</br>";
+					echo $comentario->Texto;
+				}
+			}
+			else
+			{
+				echo "error";
+			}
+
+
+
+			?>
+
+		
 	</div>
 <?php
 $app->doInclude('comun/pie.php');
