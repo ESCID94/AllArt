@@ -1,9 +1,6 @@
 <?php
-
 namespace es\ucm\fdi\aw;
 require_once __DIR__.'/includes/config.php';
-
-
 ?><!DOCTYPE html>
 <html>
 <head>
@@ -31,16 +28,12 @@ $app->doInclude('comun/sidebarIzq.php');
 			echo "</br>";
 			echo "Fecha nacimiento: " . $usuario->fechaNac();
 			echo "</br>";
-
 			$id = $usuario->id();
-
 			$img = archivo::buscarImagenDest($id);
 			if ($img !== FALSE)
 			{
 				$ruta = $img->ruta();
-
 				echo "Imagen destacada: ";
-
 				echo "<img src= '" . $ruta . "' border='0' width='300' height='300'>";
 				echo "</br>";
 			}
@@ -48,10 +41,9 @@ $app->doInclude('comun/sidebarIzq.php');
 			{
 				echo $usuario->username() . " no tiene ninguna imagen destacada.";
 			}
-
-
-
 			$arch = archivo::buscarMejoresArch($id);
+
+
 			if ($arch !== FALSE)
 			{
 				$ite = 0;
