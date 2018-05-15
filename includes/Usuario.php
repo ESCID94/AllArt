@@ -202,8 +202,6 @@ public static function registro($username, $password,$email,$fechaNac,$descripci
         $app = App::getSingleton();
         $conn = $app->conexionBd();
 
-        //TO-DO: Introducir funcionalidad
-
         $reg = sprintf("UPDATE usuarios U SET imagenPerfil='%s' WHERE '%s' = U.id"
         , $conn->real_escape_string($nuevaImagen)
         , $conn->real_escape_string($user->id) );
@@ -228,6 +226,7 @@ public static function registro($username, $password,$email,$fechaNac,$descripci
         return false;
     }
   }
+
 
   public static function buscarFollows($id)
   {

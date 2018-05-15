@@ -105,6 +105,44 @@ class Archivo
 		return false;
  	}
 
+  public static function subirArchivo ($nombre, $descripcion, $ruta, $precio)
+  {
+    $user = Usuario::buscaUsuario($_SESSION['username']);
+    if ($user) {
+        $app = App::getSingleton();
+        $conn = $app->conexionBd();
+
+        //TO-DO: Introducir funcionalidad
+
+        $reg = sprintf("INSERT INTO archivo(nombre, Descripcion,autor,imgDest, punt, ruta, Precio) VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s')"
+          , $conn->real_escape_string($nombre)
+          , $conn->real_escape_string($descripcion)
+          , $conn->real_escape_string($user->id())
+          , 0
+          , 0 //TO-DO: cambiar a null o algo que signifique "aún no puntuado"
+          , $conn->real_escape_string($ruta)
+          , $conn->real_escape_string($precio));
+
+
+        if ($conn->query($reg) === TRUE)
+        {
+            echo "<br />" . "<h2>" . "Archivo subido exitosamente!" . "</h2>";
+        }
+        else
+        {
+            echo "Error: (" . $conn->errno . ") ";
+            return false;
+        }
+
+        
+        return $conn;
+    }
+    else {
+        //error fatal: usuario no encontrado
+        return false;
+    }
+  }
+
  	public function autor()
  	{
  		$user = Usuario::buscaUsuarioById($this->autor);
