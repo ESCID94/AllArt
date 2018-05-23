@@ -141,4 +141,11 @@ EOF;
 
     return true;
   }
+
+    //https://stackoverflow.com/a/13212994/7403765
+    public function generateRandomString($length = 20) {
+    return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length/strlen($x)) )),1,$length);
 }
+}
+
+    

@@ -38,8 +38,9 @@ EOF;
     $dir_subida_container = '/var/www/html/allart/uploads/';
     $dir_subida_local = '/opt/lampp/htdocs/allart/uploads/';
     $dir_uploads = 'uploads/';
-    $ruta_subida_filesystem = $dir_subida_container . basename($_FILES['archivo']['name']);
-    $ruta_subida_bd = $dir_uploads . basename($_FILES['archivo']['name']);
+    $random = Aplicacion::getSingleton()->generateRandomString();
+    $ruta_subida_filesystem = $dir_subida_container . $random;
+    $ruta_subida_bd = $dir_uploads . $random;
 
 
     //Comprobación con seguridad y tratamiento consultado en https://stackoverflow.com/questions/28716498/uploading-a-file-using-html-php

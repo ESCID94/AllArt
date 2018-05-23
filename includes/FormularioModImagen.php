@@ -26,11 +26,12 @@ EOF;
   protected function procesaFormulario($datos) {
     $result = array();
     $ok = true;
-    $dir_subida1 = '/var/www/html/allart/img/';
-    $dir_subida1b = '/opt/lampp/htdocs/allart/img/';
-    $dir_subida2 = 'img/';
-    $imagen_subida1 = $dir_subida1b . basename($_FILES['nuevaImagen']['name']);
-    $imagen_subida2 = $dir_subida2 . basename($_FILES['nuevaImagen']['name']);
+    $dir_subida_container = '/var/www/html/allart/img/';
+    $dir_subida_local = '/opt/lampp/htdocs/allart/img/';
+    $dir_img = 'img/';
+    $random = Aplicacion::getSingleton()->generateRandomString();
+    $ruta_subida_filesystem = $dir_subida_container . $random;
+    $ruta_subida_bd = $dir_img . $random;
 
     //Comprobación con seguridad y tratamiento consultado en https://stackoverflow.com/questions/28716498/uploading-a-file-using-html-php
     $finfo = new \finfo(FILEINFO_MIME_TYPE);
@@ -48,7 +49,7 @@ EOF;
 
 
     //Ejemplo basado en http://php.net/manual/es/features.file-upload.post-method.php
-    elseif (!move_uploaded_file($_FILES['nuevaImagen']['tmp_name'], $imagen_subida1)) { //cambiado a elseif
+    elseif (!move_uploaded_file($_FILES['nuevaImagen']['tmp_name'], $ruta_subida_filesystem)) { //cambiado a elseif
         $result[] = '¡La imagen no se ha subido correctamente';
         $ok = false;
     } else {
@@ -61,7 +62,7 @@ EOF;
     }
     else{
         //TO-DO: Cambiar ubicación de archivo y nombre
-        $user = Usuario::modImagen($imagen_subida2);
+        $user = Usuario::modImagen($ruta_subida_bd);
         Aplicacion::getSingleton()->modImagen($user);
         $result = \es\ucm\fdi\aw\Aplicacion::getSingleton()->resuelve('/Perfil.php');
     }
