@@ -10,7 +10,7 @@ class Usuario {
     $user = self::buscaUsuario($username);
     if (!$user)
     {
-      $user = self::buscaUsuarioEmail($username);
+      $user = self::buscaEmail($username);
     }
     if ($user && $user->compruebaPassword($password)) {
       $app = App::getSingleton();
@@ -71,20 +71,6 @@ public static function registro($username, $password,$email,$fechaNac,$descripci
     $app = App::getSingleton();
     $conn = $app->conexionBd();
     $query = sprintf("SELECT * FROM usuarios WHERE username='%s'", $conn->real_escape_string($username));
-    $rs = $conn->query($query);
-    if ($rs && $rs->num_rows == 1) {
-      $fila = $rs->fetch_assoc();
-      $user = new Usuario($fila['id'], $fila['username'], $fila['password'], $fila['Descripcion'], $fila['Email'],$fila['FechaNac'], $fila['imagenPerfil']);
-      $rs->free();
-
-      return $user;
-    }
-    return false;
-  }
-  public static function buscaUsuarioEmail($username) {
-    $app = App::getSingleton();
-    $conn = $app->conexionBd();
-    $query = sprintf("SELECT * FROM usuarios WHERE Email='%s'", $conn->real_escape_string($username));
     $rs = $conn->query($query);
     if ($rs && $rs->num_rows == 1) {
       $fila = $rs->fetch_assoc();
@@ -227,27 +213,6 @@ public static function registro($username, $password,$email,$fechaNac,$descripci
     }
   }
 
-
-  public static function buscarFollows($id)
-  {
-        $app = App::getSingleton();
-        $conn = $app->conexionBd();
-
-        $reg = sprintf ("SELECT * FROM seguidos S WHERE S.id = '%s'" , $conn->real_escape_string($id));
-
-        $rs =$conn->query($reg);
-
-    if ($rs)
-    {
-      $results = NULL;
-      while($row = $rs->fetch_assoc()) 
-      {
-          $results[] = $row;
-      }
-      return $results;
-    }
-      return false;
-  }
 
   private $id;
 

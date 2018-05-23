@@ -38,7 +38,7 @@ class Comentario {
 
     $rs = $conn->query($query);
 
-    if ($rs)
+    if ($rs && $rs->num_rows > 0)
     {
      while($row = $rs->fetch_assoc()) 
       {
@@ -55,8 +55,8 @@ class Comentario {
     $conn = $app->conexionBd();
 
 
-    $fecha = date(DATE_RSS);
-
+    $fecha = date("Y-m-d H:i:s");
+    echo $fecha;
     $user = Usuario::buscaUsuario($username);
 
 
