@@ -35,10 +35,9 @@ EOF;
   protected function procesaFormulario($datos) {
     $result = array();
     $ok = true;
-    $dir_subida = substr_replace(RAIZ_APP, "", -8) . 'uploads/';
     $dir_uploads = 'uploads/';
     $random = Aplicacion::getSingleton()->generateRandomString();
-    $ruta_subida_filesystem = $dir_subida . $random;
+    $ruta_subida_filesystem = RUTA_SUBIDA_ARCHS . $random;
     $ruta_subida_bd = $dir_uploads . $random;
 
 

@@ -13,6 +13,8 @@ define('RUTA_APP', '/allart/');
 define('RUTA_IMGS', RUTA_APP.'img/');
 define('RUTA_CSS', RUTA_APP.'css/');
 define('RUTA_JS', RUTA_APP.'js/');
+define('RUTA_SUBIDA_IMGS', substr_replace(RAIZ_APP, "", -8) . 'img/');
+define('RUTA_SUBIDA_ARCHS', substr_replace(RAIZ_APP, "", -8) . 'uploads/');
 define('INSTALADA', true );
 
 if (! INSTALADA) {

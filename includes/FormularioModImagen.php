@@ -26,10 +26,9 @@ EOF;
   protected function procesaFormulario($datos) {
     $result = array();
     $ok = true;
-    $dir_subida = substr_replace(RAIZ_APP, "", -8) . 'img/';
     $dir_img = 'img/';
     $random = Aplicacion::getSingleton()->generateRandomString();
-    $ruta_subida_filesystem = $dir_subida . $random;
+    $ruta_subida_filesystem = RUTA_SUBIDA_IMGS . $random;
     $ruta_subida_bd = $dir_img . $random;
 
     //Comprobación con seguridad y tratamiento consultado en https://stackoverflow.com/questions/28716498/uploading-a-file-using-html-php
