@@ -26,6 +26,8 @@ $app->doInclude('comun/sidebarIzq.php');
       $comentario = $_POST['comentario'];
   	
       $com = Com::crearComentario($autor, $comentario, $idArch);
+
+      
 	 ?>
 	</div>
 <?php

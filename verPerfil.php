@@ -40,9 +40,11 @@ $app->doInclude('comun/sidebarIzq.php');
 			else
 			{
 				echo $usuario->username() . " no tiene ninguna imagen destacada.";
+				echo "</br>";
 			}
-			$arch = archivo::buscarMejoresArch($id);
 
+			//
+			$arch = archivo::buscarMejoresArch($id);
 
 			if ($arch !== FALSE)
 			{

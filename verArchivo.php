@@ -25,7 +25,8 @@ $archivo=archivo::buscaArchivo($idArchivo);
 ?>
 	<div id="contenido">
     	<?php
-			echo "<img src= '" . $archivo->ruta() . "'>";
+    		echo "<embed src= '" . $archivo->ruta(). "' width='400' height='400' autostart='true' loop='true' /> </embed>'";
+			//echo "<img src= '" . $archivo->ruta() . "'>";
 			echo "</br>";
 			echo 'Nombre: ' . $archivo->nombre();
 			echo "</br>";
@@ -37,24 +38,12 @@ $archivo=archivo::buscaArchivo($idArchivo);
 			echo "</br>";
 			echo "Precio: " . $archivo->precio();
 			echo "</br>";
-			?>
-     		<p> 
-			<FORM NAME="miFormu" ACTION="comentarios.php" METHOD="post"> 
-				<?php
-					$id_Arch  = $archivo->id();
-				?>
-			<INPUT TYPE="hidden" NAME="id" VALUE="<?= $id_Arch ?>">
-				<?php
-					$userComment  = $_SESSION['username'];
-				?>
-			<INPUT TYPE="hidden" NAME="user" VALUE = "<?= $userComment ?>">
-			Comentario: <INPUT TYPE="text" NAME="comentario" SIZE=100 MAXLENGTH=500> 
-			<BR> 
-			<INPUT TYPE="submit" CLASS="boton" VALUE="Comentar"> 
-			</FORM>
 
-			<?php 
 			$ID = $archivo->id();
+ 			$formComment = new \es\ucm\fdi\aw\FormularioComentario($ID);
+ 			$formComment->gestiona();
+
+			
 
 			$comments = Comentario::verComentarios($ID);
 
@@ -76,7 +65,7 @@ $archivo=archivo::buscaArchivo($idArchivo);
 			}
 			else
 			{
-				echo "error";
+				echo "No hay Comentarios. Se el primero en comentar!";
 			}
 
 

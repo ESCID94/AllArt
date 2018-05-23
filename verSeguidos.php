@@ -23,11 +23,11 @@ $app->doInclude('comun/sidebarIzq.php');
     	<?php
     		$username = $_SESSION['username'];
     		$user = Usuario::buscaUsuario($username);
-    		$idFollow = Usuario::buscarFollows($user->id());
-    		if ($idFollow !== NULL)
+    		$idFollow = Seguidos::buscarFollows($user->id());
+    		if ($idFollow !== FALSE)
     		{
     			$ite = 0;
-    			foreach ($idFollow as $key => $value) {
+    			foreach ($idFollow as $key=>$value) {
     				$id = $idFollow[$key]['idFollow'];
     				$usuarioFollow = Usuario::buscaUsuarioById("$id");
     				$ite++;
