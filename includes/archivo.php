@@ -112,7 +112,6 @@ class Archivo
         $app = App::getSingleton();
         $conn = $app->conexionBd();
 
-        //TO-DO: Introducir funcionalidad
 
         $reg = sprintf("INSERT INTO archivo(nombre, Descripcion,autor,imgDest, punt, ruta, Precio) VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s')"
           , $conn->real_escape_string($nombre)
@@ -127,6 +126,43 @@ class Archivo
         if ($conn->query($reg) === TRUE)
         {
             echo "<br />" . "<h2>" . "Archivo subido exitosamente!" . "</h2>";
+        }
+        else
+        {
+            echo "Error: (" . $conn->errno . ") ";
+            return false;
+        }
+
+        
+        return $conn;
+    }
+    else {
+        //error fatal: usuario no encontrado
+        return false;
+    }
+  }
+
+
+  public static function modificarArchivo ($id, $nombre, $descripcion, $precio, $destacado)
+  {
+    $user = Usuario::buscaUsuario($_SESSION['username']);
+    if ($user) {
+        $app = App::getSingleton();
+        $conn = $app->conexionBd();
+
+        //TO-DO: Si $destacado=1, poner el resto de archivos del usuario a imgDest=0
+
+        $reg = sprintf("UPDATE archivo A SET nombre='%s', Descripcion='%s', Precio='%s', imgDest='%s' WHERE '%s' = A.id"
+        , $conn->real_escape_string($nombre)
+        , $conn->real_escape_string($descripcion)
+        , $conn->real_escape_string($precio)
+        , $conn->real_escape_string($destacado)
+        , $conn->real_escape_string($id) );
+
+
+        if ($conn->query($reg) === TRUE)
+        {
+            echo "<br />" . "<h2>" . "Archivo modificado exitosamente!" . "</h2>";
         }
         else
         {

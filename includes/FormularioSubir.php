@@ -99,6 +99,9 @@ EOF;
         $ok = false;
     }
 
+    //TO-DO: Añadir extensión del archivo al nombre
+    //TO-DO: Validar contenido de los campos nombre, descripcion, precio...
+
 
     //Ejemplo basado en http://php.net/manual/es/features.file-upload.post-method.php
     elseif (!move_uploaded_file($_FILES['archivo']['tmp_name'], $ruta_subida_filesystem)) {
@@ -113,10 +116,8 @@ EOF;
         $result[] = 'No se ha completado la subida del archivo correctamente';
     }
     else{
-        //TO-DO: Cambiar ubicación de archivo y nombre
+
         $arch = archivo::subirArchivo($datos['nombre'], $datos['descripcion'], $ruta_subida_bd, $datos['precio']);
-        //Aplicacion::getSingleton()->modImagen($user);
-        //$result = \es\ucm\fdi\aw\Aplicacion::getSingleton()->resuelve('/Perfil.php'); //cambiar destino ¿dinámicamente?
     }
     return $result;
   }
