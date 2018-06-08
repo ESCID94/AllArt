@@ -51,10 +51,12 @@ EOF;
     } else { $esDestacado = 0; }
     
     if(!$ok){ 
-        $result[] = 'No se ha completado la subida del archivo correctamente';
+        $result[] = 'No se ha completado la modificación del archivo correctamente';
     }
     else{
         $arch = archivo::modificarArchivo($datos['id'], $datos['nombre'], $datos['descripcion'], $datos['precio'], $esDestacado);
+        $result = \es\ucm\fdi\aw\Aplicacion::getSingleton()->resuelve('/verArchivo.php');
+        $result = $result . $arch->id();
     }
     return $result;
   }

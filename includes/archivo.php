@@ -181,12 +181,15 @@ class Archivo
 
  	public function autor()
  	{
- 		$user = Usuario::buscaUsuarioById($this->autor);
-
- 		return $user->username();
+ 		return $this->autor;
  	}
 
+    public function nombreAutor()
+    {
+        $user = Usuario::buscaUsuarioById($this->autor);
 
+ 		return $user->username();
+    }
 
 	public function ruta()
   	{

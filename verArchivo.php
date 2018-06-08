@@ -35,7 +35,7 @@ else $archivo=false;
 			    echo "</br>";
 			    echo "Nombre: " . $archivo->nombre();
 			    echo "</br>";
-			    echo "Autor: " . $archivo->autor();
+			    echo "Autor: " . $archivo->nombreAutor();
 			    echo "</br>";
 			    echo "Descripción: " . $archivo->descripcion();
 			    echo "</br>";
@@ -43,7 +43,10 @@ else $archivo=false;
 			    echo "</br>";
 			    echo "Precio: " . $archivo->precio();
 			    echo "</br>";
-
+                if(Aplicacion::getSingleton()->usuarioLogueado() && $archivo->autor() == Usuario::buscaUsuario($_SESSION['username'])->id()){
+                    $URLArchMod =  $app->resuelve('/modArchivo.php') . "?archivo=" . $idArchivo;
+			        echo '<input type="button" value="Modificar archivo" onclick="location.href=\'' . $URLArchMod . '\'"/>';
+                }
 			    $ID = $archivo->id();
      			$formComment = new \es\ucm\fdi\aw\FormularioComentario($ID);
      			$formComment->gestiona();
