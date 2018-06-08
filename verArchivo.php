@@ -25,53 +25,55 @@ $archivo=archivo::buscaArchivo($idArchivo);
 ?>
 	<div id="contenido">
     	<?php
-    		echo "<embed src= '" . $archivo->ruta(). "' width='400' height='400' autostart='true' loop='true' /> </embed>'";
-			//echo "<img src= '" . $archivo->ruta() . "'>";
-			echo "</br>";
-			echo 'Nombre: ' . $archivo->nombre();
-			echo "</br>";
-			echo "Autor: " . $archivo->autor();
-			echo "</br>";
-			echo "Descripción: " . $archivo->descripcion();
-			echo "</br>";
-			echo "Puntuacion: " . $archivo->puntuacion();
-			echo "</br>";
-			echo "Precio: " . $archivo->precio();
-			echo "</br>";
+            if($archivo != false) {
+        		echo "<embed src= '" . $archivo->ruta() . "' width='400' height='400' autostart='true' loop='true' /> </embed>'";
+			    //echo "<img src= '" . $archivo->ruta() . "'>";
+			    echo "</br>";
+			    echo "Nombre: " . $archivo->nombre();
+			    echo "</br>";
+			    echo "Autor: " . $archivo->autor();
+			    echo "</br>";
+			    echo "Descripción: " . $archivo->descripcion();
+			    echo "</br>";
+			    echo "Puntuacion: " . $archivo->puntuacion();
+			    echo "</br>";
+			    echo "Precio: " . $archivo->precio();
+			    echo "</br>";
 
-			$ID = $archivo->id();
- 			$formComment = new \es\ucm\fdi\aw\FormularioComentario($ID);
- 			$formComment->gestiona();
+			    $ID = $archivo->id();
+     			$formComment = new \es\ucm\fdi\aw\FormularioComentario($ID);
+     			$formComment->gestiona();
 
-			
+			    
 
-			$comments = Comentario::verComentarios($ID);
+			    $comments = Comentario::verComentarios($ID);
 
-			if ($comments !== FALSE)
-			{
-				$ite = 0;
-				foreach($comments as $value)
-				{
-					$comentario = (object) $comments[$ite];
-					$ite++;
+			    if ($comments !== FALSE)
+			    {
+				    $ite = 0;
+				    foreach($comments as $value)
+				    {
+					    $comentario = (object) $comments[$ite];
+					    $ite++;
 
-					$autor = Usuario::buscaUsuarioById($comentario->Autor);
-					echo "</br>";
-					echo $autor->username();
-					echo $comentario->Fecha;
-					echo "</br>";
-					echo $comentario->Texto;
-				}
-			}
-			else
-			{
-				echo "No hay Comentarios. Se el primero en comentar!";
-			}
+					    $autor = Usuario::buscaUsuarioById($comentario->Autor);
+					    echo "</br>";
+					    echo $autor->username();
+					    echo $comentario->Fecha;
+					    echo "</br>";
+					    echo $comentario->Texto;
+				    }
+			    }
+			    else
+			    {
+				    echo "No hay Comentarios. Se el primero en comentar!";
+			    }
+            }
 
-
-
-			?>
-
+            else {
+                echo "No se ha encontrado el archivo";
+            }
+		?>
 		
 	</div>
 <?php
