@@ -7,7 +7,7 @@ class FormularioModPerfil extends Form {
   const HTML5_EMAIL_REGEXP = '^[a-zA-Z0-9.!#$%&\'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$';
 
   public function __construct() {
-    parent::__construct('formMod');
+    parent::__construct('formModPerfil');
   }
   
   protected function generaCamposFormulario ($datos) {

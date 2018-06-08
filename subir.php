@@ -15,8 +15,8 @@ $app->doInclude('comun/cabecera.php');
     <div id="contenido">
     <?php 
         $opciones = array( 'ajax' => false, 'action' => null, 'class' => null, 'enctype' => "multipart/form-data" );
-    	$formModPerfil = new \es\ucm\fdi\aw\FormularioSubir($opciones);
-	 	$formModPerfil->gestiona();
+    	$formSubir = new \es\ucm\fdi\aw\FormularioSubir($opciones);
+	 	$formSubir->gestiona();
 	 ?>
 	</div>
 <?php
