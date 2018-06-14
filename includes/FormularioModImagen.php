@@ -33,19 +33,25 @@ EOF;
 
     //Comprobación con seguridad y tratamiento consultado en https://stackoverflow.com/questions/28716498/uploading-a-file-using-html-php
     $finfo = new \finfo(FILEINFO_MIME_TYPE);
-    if (false === $ext = array_search(
-        $finfo->file($_FILES['nuevaImagen']['tmp_name']),
+    $realmimetype = $finfo->file($_FILES['nuevaImagen']['tmp_name']);
+    $ext = array_search(
+        $realmimetype,
         array(
             'jpg' => 'image/jpeg',
             'png' => 'image/png',
         ),
         true
-    )){
+    );
+    //Se añade la extensión de la imagen al nombre
+    if($ext != false) {
+        $ruta_subida_filesystem = $ruta_subida_filesystem.".". $ext;
+        $ruta_subida_bd = $ruta_subida_bd.".". $ext;
+    }
+
+    if ($ext == false){
         $result[] = 'El archivo no es una imagen png o jpg';
         $ok = false;
     }
-
-
     //Ejemplo basado en http://php.net/manual/es/features.file-upload.post-method.php
     elseif (!move_uploaded_file($_FILES['nuevaImagen']['tmp_name'], $ruta_subida_filesystem)) { //cambiado a elseif
         $result[] = '¡La imagen no se ha subido correctamente';
