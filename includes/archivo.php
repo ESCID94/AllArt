@@ -158,7 +158,21 @@ class Archivo
         $app = App::getSingleton();
         $conn = $app->conexionBd();
 
-        //TO-DO: Si $destacado=1, poner el resto de archivos del usuario a imgDest=0
+        //Si $destacado=1, poner el resto de archivos del usuario a imgDest=0
+        if($destacado==1){
+            $regDestacado = sprintf("UPDATE archivo A SET imgDest = 0 WHERE A.autor = '%s'", archivo::buscaArchivo($id)->autor());
+
+            if ($conn->query($regDestacado) === TRUE)
+            {
+                echo "<br />" . "<h2>" . "Archivo destacado actualizado" . "</h2>";
+            }
+            else
+            {
+                echo "Error al actualizar destacado: (" . $conn->errno . ") ";
+                return false;
+            }
+        }
+
 
         $reg = sprintf("UPDATE archivo A SET nombre='%s', Descripcion='%s', Precio='%s', imgDest='%s' WHERE '%s' = A.id"
         , $conn->real_escape_string($nombre)

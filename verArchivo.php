@@ -18,7 +18,6 @@ require_once __DIR__.'/includes/config.php';
 <?php
 
 $app->doInclude('comun/cabecera.php');
-$app->doInclude('comun/sidebarIzq.php');
 
 $idArchivo=isset($_GET['archivo']) ? htmlspecialchars(trim(strip_tags($_GET['archivo']))) : null;
 
@@ -30,19 +29,11 @@ else $archivo=false;
 	<div id="contenido">
     	<?php
             if($archivo != false) {
-        		echo "<embed src= '" . $archivo->ruta() . "' width='400' height='400' autostart='true' loop='true' /> </embed>'";
-			    //echo "<img src= '" . $archivo->ruta() . "'>";
-			    echo "</br>";
-			    echo "Nombre: " . $archivo->nombre();
-			    echo "</br>";
-			    echo "Autor: " . $archivo->nombreAutor();
-			    echo "</br>";
-			    echo "Descripción: " . $archivo->descripcion();
-			    echo "</br>";
-			    echo "Puntuacion: " . $archivo->puntuacion();
-			    echo "</br>";
-			    echo "Precio: " . $archivo->precio();
-			    echo "</br>";
+                //Tratamiento especial para cada tipo de archivo
+                $mostradorArchivo = new \es\ucm\fdi\aw\MostradorArchivo($archivo);
+                echo $mostradorArchivo->mostrar();
+
+                //Muestra botón para modificar si es el propietario del archivo
                 if(Aplicacion::getSingleton()->usuarioLogueado() && $archivo->autor() == Usuario::buscaUsuario($_SESSION['username'])->id()){
                     $URLArchMod =  $app->resuelve('/modArchivo.php') . "?archivo=" . $idArchivo;
 			        echo '<input type="button" value="Modificar archivo" onclick="location.href=\'' . $URLArchMod . '\'"/>';
@@ -50,8 +41,6 @@ else $archivo=false;
 			    $ID = $archivo->id();
      			$formComment = new \es\ucm\fdi\aw\FormularioComentario($ID);
      			$formComment->gestiona();
-
-			    
 
 			    $comments = Comentario::verComentarios($ID);
 
