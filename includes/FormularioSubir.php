@@ -76,8 +76,9 @@ EOF;
 
 
     $finfo = new \finfo(FILEINFO_MIME_TYPE);
+    $realmimetype = $finfo->file($_FILES['archivo']['tmp_name']);
     if (false === $ext = array_search(
-        $finfo->file($_FILES['archivo']['tmp_name']),
+        $realmimetype,
         $opciones,
         true
     )){
@@ -117,7 +118,7 @@ EOF;
     }
     else{
 
-        $arch = archivo::subirArchivo($datos['nombre'], $datos['descripcion'], $ruta_subida_bd, $datos['precio']);
+        $arch = archivo::subirArchivo($datos['nombre'], $datos['descripcion'], $ruta_subida_bd, $datos['precio'], $datos['tipo'], $realmimetype);
     }
     return $result;
   }

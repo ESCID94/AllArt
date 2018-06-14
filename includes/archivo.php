@@ -24,8 +24,12 @@ class Archivo
 
 	private $precio;
 
+    private $tipo;
 
-	private function __construct($id, $nombre,$descripcion,  $autor, $dest, $puntuacion, $ruta, $precio)
+    private $tipomime;
+
+
+	private function __construct($id, $nombre,$descripcion,  $autor, $dest, $puntuacion, $ruta, $precio, $tipo, $tipomime)
 	{
 		$this->id = $id;
 		$this->nombre = $nombre;
@@ -35,6 +39,8 @@ class Archivo
 		$this->punt = $puntuacion;
 		$this->ruta = $ruta;
 		$this->precio = $precio;
+        $this->tipo = $tipo;
+        $this->tipomime = $tipomime;
 	}
 
 
@@ -55,7 +61,7 @@ class Archivo
     	if ($rs && $rs->num_rows == 1) 
     	{
     		$fila = $rs->fetch_assoc();
-      		$img = new archivo($fila['id'], $fila['nombre'],$fila['Descripcion'], $fila['autor'], $fila['imgDest'], $fila['punt'], $fila['ruta'],$fila['Precio']);
+      		$img = new archivo($fila['id'], $fila['nombre'],$fila['Descripcion'], $fila['autor'], $fila['imgDest'], $fila['punt'], $fila['ruta'],$fila['Precio'],$fila['tipo'],$fila['tipoMime']);
       		$rs->free();
 
       		return $img;
@@ -97,7 +103,7 @@ class Archivo
 		{
 			$fila = $rs->fetch_assoc();
 			echo $fila['punt']; //TO-DO: BORRAR
-      		$arch = new archivo($fila['id'], $fila['nombre'],$fila['Descripcion'], $fila['autor'], $fila['imgDest'], $fila['punt'], $fila['ruta'],$fila['Precio']);
+      		$arch = new archivo($fila['id'], $fila['nombre'],$fila['Descripcion'], $fila['autor'], $fila['imgDest'], $fila['punt'], $fila['ruta'],$fila['Precio'],$fila['tipo'],$fila['tipoMime']);
       		$rs->free();
 
       		return $arch;
@@ -105,7 +111,7 @@ class Archivo
 		return false;
  	}
 
-  public static function subirArchivo ($nombre, $descripcion, $ruta, $precio)
+  public static function subirArchivo ($nombre, $descripcion, $ruta, $precio, $tipo, $mimetype)
   {
     $user = Usuario::buscaUsuario($_SESSION['username']);
     if ($user) {
@@ -113,14 +119,16 @@ class Archivo
         $conn = $app->conexionBd();
 
 
-        $reg = sprintf("INSERT INTO archivo(nombre, Descripcion,autor,imgDest, punt, ruta, Precio) VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s')"
+        $reg = sprintf("INSERT INTO archivo(nombre, Descripcion,autor,imgDest, punt, ruta, Precio, tipo, tipoMime) VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')"
           , $conn->real_escape_string($nombre)
           , $conn->real_escape_string($descripcion)
           , $conn->real_escape_string($user->id())
           , 0
           , 0 //TO-DO: cambiar a null o algo que signifique "aún no puntuado"
           , $conn->real_escape_string($ruta)
-          , $conn->real_escape_string($precio));
+          , $conn->real_escape_string($precio)
+          , $conn->real_escape_string($tipo)
+          , $mimetype);
 
 
         if ($conn->query($reg) === TRUE)
@@ -218,6 +226,14 @@ class Archivo
  	public function id()
  	{
  		return $this->id;
+ 	}
+    public function tipo()
+ 	{
+ 		return $this->tipo;
+ 	}
+    public function tipomime()
+ 	{
+ 		return $this->tipomime;
  	}
 }
 
