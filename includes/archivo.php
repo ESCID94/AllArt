@@ -102,7 +102,7 @@ class Archivo
 		if ($rs && $rs->num_rows == 1)
 		{
 			$fila = $rs->fetch_assoc();
-			echo $fila['punt']; //TO-DO: BORRAR
+			//echo $fila['punt']; //TO-DO: BORRAR
       		$arch = new archivo($fila['id'], $fila['nombre'],$fila['Descripcion'], $fila['autor'], $fila['imgDest'], $fila['punt'], $fila['ruta'],$fila['Precio'],$fila['tipo'],$fila['tipoMime']);
       		$rs->free();
 
@@ -185,6 +185,39 @@ class Archivo
         if ($conn->query($reg) === TRUE)
         {
             echo "<br />" . "<h2>" . "Archivo modificado exitosamente!" . "</h2>";
+        }
+        else
+        {
+            echo "Error: (" . $conn->errno . ") ";
+            return false;
+        }
+
+        
+        return $conn;
+    }
+    else {
+        //error fatal: usuario no encontrado
+        return false;
+    }
+  }
+
+  public static function eliminarArchivo ($id)
+  {
+    $user = Usuario::buscaUsuario($_SESSION['username']);
+    if ($user) {
+        $app = App::getSingleton();
+        $conn = $app->conexionBd();
+
+        $ruta=archivo::buscaArchivo($id)->ruta();
+
+        $reg = sprintf("DELETE FROM archivo WHERE '%s' = id AND '%s' = autor"
+        , $conn->real_escape_string($id)
+        , $user->id());
+
+        if ($conn->query($reg) === TRUE)
+        {
+            echo "<br />" . "<h2>" . "Archivo eliminado exitosamente!" . "</h2>";
+            unlink($ruta);
         }
         else
         {

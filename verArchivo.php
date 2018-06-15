@@ -33,16 +33,19 @@ else $archivo=false;
                 $mostradorArchivo = new \es\ucm\fdi\aw\MostradorArchivo($archivo);
                 echo $mostradorArchivo->mostrar();
 
-                //Muestra botón para modificar si es el propietario del archivo
+                //Muestra botón para modificar y eliminar si es el propietario del archivo
                 if(Aplicacion::getSingleton()->usuarioLogueado() && $archivo->autor() == Usuario::buscaUsuario($_SESSION['username'])->id()){
                     $URLArchMod =  $app->resuelve('/modArchivo.php') . "?archivo=" . $idArchivo;
-			        echo '<input type="button" value="Modificar archivo" onclick="location.href=\'' . $URLArchMod . '\'"/>';
+			        echo '<p><input type="button" value="Modificar archivo" onclick="location.href=\'' . $URLArchMod . '\'"/></p></br>';
+                    $URLArchElim =  $app->resuelve('/eliminarArchivo.php') . "?archivo=" . $idArchivo;
+                    echo '<p><input type="button" value="Eliminar archivo" onclick="location.href=\'' . $URLArchElim . '\'"/></p></br>';
+                    
                 }
 			    $ID = $archivo->id();
-     			$formComment = new \es\ucm\fdi\aw\FormularioComentario($ID);
+     			$formComment = new \es\ucm\fdi\aw\FormularioComentario($idArchivo);
      			$formComment->gestiona();
 
-			    $comments = Comentario::verComentarios($ID);
+			    $comments = Comentario::verComentarios($idArchivo);
 
 			    if ($comments !== FALSE)
 			    {
