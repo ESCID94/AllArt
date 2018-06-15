@@ -14,7 +14,7 @@ require_once __DIR__.'/includes/config.php';
 $nombreUsuario=htmlspecialchars(trim(strip_tags($_GET['usuario'])));
 $usuario=Usuario::buscaUsuario($nombreUsuario);
 $app->doInclude('comun/cabecera.php');
-$app->doInclude('comun/sidebarIzq.php');
+//$app->doInclude('comun/sidebarIzq.php');
 ?>
 	<div id="contenido">
     	<?php
@@ -43,21 +43,24 @@ $app->doInclude('comun/sidebarIzq.php');
 				echo "</br>";
 			}
 
-			//
-			$arch = archivo::buscarMejoresArch($id);
-
-			if ($arch !== FALSE)
+			$numero=10;
+			$archivos = archivo::buscarMejoresArch($id,$numero);
+            var_dump($archivos);
+			if ($archivos !== FALSE)
 			{
 				$ite = 0;
-				foreach($arch as $value )
+				foreach($archivos as $arch)
 				{
 					if ($ite == 10)
 					{
 						break;
 					}
-					$img = (object) $arch[$ite];
+					$archivo = archivo::buscaArchivo($arch);
 					$ite++;
-					echo "<img src= '" . $img->ruta . "' border='0' width='100' height='100'>";
+					if($arch!=false) {
+                        $mostradorArchivo = new \es\ucm\fdi\aw\MostradorArchivo(archivo::buscaArchivo($arch));
+                        echo $mostradorArchivo->mostrar() . "</br>";
+                    }
 					if ($ite == 4)
 					{
 						echo "</br>";

@@ -70,25 +70,29 @@ class Archivo
 	}
 
 
-	public static function buscarMejoresArch($idAutor)
+	public static function buscarMejoresArch($idAutor,$numero)
  	{
  		$app = App::getSingleton();
    		$conn = $app->conexionBd();
-    	$query = sprintf("SELECT * FROM archivo A WHERE A.autor='%s' ORDER BY A.punt ASC", $conn->real_escape_string($idAutor));
-		$rs = $conn->query($query);
+        if(is_numeric($numero)){
+        	$query = sprintf("SELECT * FROM archivo A WHERE A.autor='%s' ORDER BY A.punt ASC", $conn->real_escape_string($idAutor));
+		    $rs = $conn->query($query);
 
-		if ($rs)
-		{
-			$archivos = array();
+		    if ($rs)
+		    {
+			    $archivos = array();
+                $i=0;
 
-
-			while($row = $rs->fetch_assoc()) 
-			{
-   				$results[] = $row;
-			}
-			return $results;
-		}
-		return false;
+                while(($fila = $rs->fetch_assoc()) && ($i < $numero)) 
+			    {
+                    echo $fila['id'];
+       				array_push($archivos,$fila['id']);
+                    $i++;
+			    }
+			    return $archivos;
+		    }
+		    return false;
+        }
  	}
 
  	public static function buscaArchivo($idArchivo)
