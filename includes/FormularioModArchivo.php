@@ -64,7 +64,12 @@ EOF;
        	$result[] = 'No se ha encontrado el archivo';
         echo $idSet;
         $ok=false;
-    } elseif(!Aplicacion::getSingleton()->usuarioLogueado() || archivo::buscaArchivo($idSet)->autor() != Usuario::buscaUsuario($_SESSION['username'])->id()){
+    } 
+    elseif(!is_numeric($datos['precio'])) {
+        $result[] = 'Precio debe ser una variable numérica';
+        $ok=false;
+    } 
+    elseif(!Aplicacion::getSingleton()->usuarioLogueado() || archivo::buscaArchivo($idSet)->autor() != Usuario::buscaUsuario($_SESSION['username'])->id()){
         $result[] = 'No puedes modificar el archivo';
         $ok=false;
     }
@@ -73,8 +78,10 @@ EOF;
         $result[] = 'No se ha completado la modificación del archivo correctamente';
     } else{
         $arch = archivo::modificarArchivo($datos['id'], $datos['nombre'], $datos['descripcion'], $datos['precio'], $esDestacado);
-        if ($arch!=false) $result[]= 'Modificado con éxito';
-        $result = \es\ucm\fdi\aw\Aplicacion::getSingleton()->resuelve('/verArchivo.php?archivo='.$datos['id']);
+        if ($arch!=false){
+            $result[]= 'Modificado con éxito';
+            $result = \es\ucm\fdi\aw\Aplicacion::getSingleton()->resuelve('/verArchivo.php?archivo='.$datos['id']);}
+        else $result[]= 'Error al modificar el archivo';
     }
 
     return $result;

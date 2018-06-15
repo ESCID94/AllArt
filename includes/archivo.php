@@ -102,7 +102,6 @@ class Archivo
 		if ($rs && $rs->num_rows == 1)
 		{
 			$fila = $rs->fetch_assoc();
-			//echo $fila['punt']; //TO-DO: BORRAR
       		$arch = new archivo($fila['id'], $fila['nombre'],$fila['Descripcion'], $fila['autor'], $fila['imgDest'], $fila['punt'], $fila['ruta'],$fila['Precio'],$fila['tipo'],$fila['tipoMime']);
       		$rs->free();
 

@@ -105,10 +105,10 @@ EOF;
         $result[] = 'El tipo de archivo subido no es el esperado';
         $ok = false;
     }
-
-    
-    //TO-DO: Validar contenido de los campos nombre, descripcion, precio...
-
+    elseif(!is_numeric($datos['precio'])) {
+        $result[] = 'Precio debe ser una variable numérica';
+        $ok=false;
+    }
     //Ejemplo basado en http://php.net/manual/es/features.file-upload.post-method.php
     elseif (!move_uploaded_file($_FILES['archivo']['tmp_name'], $ruta_subida_filesystem)) {
         $result[] = 'Error al procesar el archivo';
