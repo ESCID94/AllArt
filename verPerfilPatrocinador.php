@@ -19,11 +19,11 @@ $nombreUsuario=htmlspecialchars(trim(strip_tags($_GET['usuario'])));
 $usuario=Usuario::buscaUsuario($nombreUsuario);
 
 $app->doInclude('comun/cabecera.php');
-$app->doInclude('comun/sidebarIzq.php');
+//$app->doInclude('comun/sidebarIzq.php');
 ?>
 	<div id="contenido">
     	<?php
-			
+	    echo "<h2>Patrocinador:</h2>";
 		echo "<img src= '" . $usuario->imgPerfil() . "' border='0' width='100' height='100'>";
 		echo "</br>";
 		echo 'Nombre: ' . $usuario->username();
@@ -31,19 +31,21 @@ $app->doInclude('comun/sidebarIzq.php');
 		echo "Email: " . $usuario->email();
 		echo "</br>";
 		echo "Descripcion: " . $usuario->descripcion();
-		echo "</br>";
+		echo "</br></br><h2>Usuarios patrocinados:</h2>";
 		
-		$nombreUsu = $usuario->username();
-		$mysqli = new mysqli("localhost", "admin", "foo2aipheCah", "allart");
-		$query = "SELECT username FROM usuarios WHERE patrocinador='$nombreUsu'";
-		$resultado = $mysqli->query($query);
-			while($registro = $resultado->fetch_assoc()){
-				echo $registro;				
-			}
-			
 
-		$resultado->free();
-		$mysqli->close();
+                $usuarios = Usuario::buscaUsuariosPatrocinados($usuario->id());
+			    if ($usuarios !== FALSE)
+			    {
+				    foreach($usuarios as $usu)
+				    {
+					    $usuario = Usuario::buscaUsuarioById($usu);
+					    if($usuario!=false) {
+                            $mostradorUsuario = new \es\ucm\fdi\aw\MostradorUsuario($usuario);
+                            echo $mostradorUsuario->mostrar() . "</br>";
+                        }
+				    }
+			    } 
 
 
 			

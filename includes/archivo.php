@@ -85,7 +85,7 @@ class Archivo
 
                 while(($fila = $rs->fetch_assoc()) && ($i < $numero)) 
 			    {
-                    echo $fila['id'];
+                    //echo $fila['id'];
        				array_push($archivos,$fila['id']);
                     $i++;
 			    }

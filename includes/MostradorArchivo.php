@@ -11,7 +11,7 @@ class MostradorArchivo {
   }
   
   public function mostrar () {
-    $html="";
+    $html="<div class='archivo'>";
     //echo "<embed src= '" . $archivo->ruta() . "' width='400' height='400' autostart='true' loop='true' /> </embed>'";
     //echo "<img src= '" . $archivo->ruta() . "'>";
 	if($this->archivo != null) {	    
@@ -43,7 +43,7 @@ class MostradorArchivo {
         $html.= "Autor: " . $this->archivo->nombreAutor() . "</br>";
         $html.= "Descripción: " . $this->archivo->descripcion() . "</br>";
         $html.= "Puntuacion: " . $this->archivo->puntuacion() . "</br>";
-        $html.= "Precio: " . $this->archivo->precio() . "</br>";
+        $html.= "Precio: " . $this->archivo->precio() . "</br></div>";
     }
     return $html;
   }

@@ -48,13 +48,14 @@ public static function registro($username, $password,$email,$fechaNac,$descripci
 	  {
 		  //$pass = password_hash($password, PASSWORD_DEFAULT);      
 		  //$reg = "INSERT INTO usuarios(username, password, Email, FechaNac, Descripcion) VALUES ($username, $pass, $email, $fechaNac, $descripcion)"; 
-      $reg = sprintf("INSERT INTO usuarios(username, password,Email,FechaNac, Descripcion, imagenPerfil) VALUES('%s', '%s', '%s', '%s', '%s', '%s')"
+      $reg = sprintf("INSERT INTO usuarios(username, password,Email,FechaNac, Descripcion, imagenPerfil, patrocinador) VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s')"
           , $conn->real_escape_string($username)
           , password_hash($password, PASSWORD_DEFAULT)
           , $conn->real_escape_string($email)
           , $fechaNac
           , $conn->real_escape_string($descripcion)
-          , 'img/imgBasica.jpg');
+          , 'img/imgBasica.jpg'
+          , null);
       if ($conn->query($reg)=== TRUE)
 		  {
 			 echo "<br />" . "<h2>" . "Usuario Creado Exitosamente!" . "</h2>";
@@ -74,7 +75,7 @@ public static function registro($username, $password,$email,$fechaNac,$descripci
     $rs = $conn->query($query);
     if ($rs && $rs->num_rows == 1) {
       $fila = $rs->fetch_assoc();
-      $user = new Usuario($fila['id'], $fila['username'], $fila['password'], $fila['Descripcion'], $fila['Email'],$fila['FechaNac'], $fila['imagenPerfil']);
+      $user = new Usuario($fila['id'], $fila['username'], $fila['password'], $fila['Descripcion'], $fila['Email'],$fila['FechaNac'], $fila['imagenPerfil'], $fila['patrocinador']);
       $rs->free();
 
       return $user;
@@ -90,7 +91,7 @@ public static function registro($username, $password,$email,$fechaNac,$descripci
     $rs = $conn->query($query);
     if ($rs && $rs->num_rows == 1) {
       $fila = $rs->fetch_assoc();
-      $user = new Usuario($fila['id'], $fila['username'], $fila['password'], $fila['Descripcion'], $fila['Email'],$fila['FechaNac'], $fila['imagenPerfil']);
+      $user = new Usuario($fila['id'], $fila['username'], $fila['password'], $fila['Descripcion'], $fila['Email'],$fila['FechaNac'], $fila['imagenPerfil'], $fila['patrocinador']);
       $rs->free();
 
       return $user;
@@ -105,7 +106,7 @@ public static function registro($username, $password,$email,$fechaNac,$descripci
     $rs = $conn->query($query);
     if ($rs && $rs->num_rows == 1) {
       $fila = $rs->fetch_assoc();
-      $user = new Usuario($fila['id'], $fila['username'], $fila['password'], $fila['Descripcion'], $fila['Email'],$fila['FechaNac'], $fila['imagenPerfil']);
+      $user = new Usuario($fila['id'], $fila['username'], $fila['password'], $fila['Descripcion'], $fila['Email'],$fila['FechaNac'], $fila['imagenPerfil'],$fila['patrocinador']);
       $rs->free();
 
       return $user;
@@ -253,7 +254,7 @@ public static function registro($username, $password,$email,$fechaNac,$descripci
 
   private $patrocinador;
 
-  private function __construct($id, $username, $password, $descripcion, $email,$fechaNac, $imgPerfil) {
+  private function __construct($id, $username, $password, $descripcion, $email,$fechaNac, $imgPerfil, $patrocinador) {
     $this->id = $id;
     $this->username = $username;
     $this->password = $password;
@@ -308,19 +309,25 @@ public static function registro($username, $password,$email,$fechaNac,$descripci
   public function compruebaPassword($password) {
     return password_verify($password, $this->password);
   }
-  public static function buscaUsuarioPatrocinado($username) {
+  public static function buscaUsuariosPatrocinados($patrocinador) {
     $app = App::getSingleton();
-    $conn = $app->conexionBd();
-    $query = sprintf("SELECT * FROM usuarios WHERE username='%s'", $conn->real_escape_string($username));
-    $rs = $conn->query($query);
-    if ($rs && $rs->num_rows == 1) {
-      $fila = $rs->fetch_assoc();
-      $user = new Usuario($fila['id'], $fila['username'], $fila['password'], $fila['Descripcion'], $fila['Email'],$fila['FechaNac'], $fila['imagenPerfil']);
-      $rs->free();
+	$conn = $app->conexionBd();
+    	$query = sprintf("SELECT * FROM usuarios WHERE patrocinador='%s'", $conn->real_escape_string($patrocinador));
+        $rs = $conn->query($query);
 
-      return $user;
-    }
-    return false;
+		if ($rs)
+		{
+		    $usuarios = array();
+            $i=0;
+
+            while(($fila = $rs->fetch_assoc())) 
+			{
+       		    array_push($usuarios,$fila['id']);
+                $i++;
+			}
+			return $usuarios;
+		}
+		return false;
   }
   /*public function cambiaPassword($nuevoPassword) {
     $this->password = password_hash($nuevoPassword, PASSWORD_DEFAULT);
