@@ -213,6 +213,27 @@ public static function registro($username, $password,$email,$fechaNac,$descripci
     }
   }
 
+  public static function buscarFollows($id)
+  {
+        $app = App::getSingleton();
+        $conn = $app->conexionBd();
+
+        $reg = sprintf ("SELECT * FROM seguidos S WHERE S.id = '%s'" , $conn->real_escape_string($id));
+
+        $rs =$conn->query($reg);
+
+    if ($rs)
+    {
+      $results = NULL;
+      while($row = $rs->fetch_assoc()) 
+      {
+          $results[] = $row;
+      }
+      return $results;
+    }
+      return false;
+  }
+
 
   private $id;
 
@@ -230,6 +251,8 @@ public static function registro($username, $password,$email,$fechaNac,$descripci
 
   private $imgPerfil;
 
+  private $patrocinador;
+
   private function __construct($id, $username, $password, $descripcion, $email,$fechaNac, $imgPerfil) {
     $this->id = $id;
     $this->username = $username;
@@ -239,6 +262,7 @@ public static function registro($username, $password,$email,$fechaNac,$descripci
     $this->email = $email;
     $this->fechaNac = $fechaNac;
     $this->imgPerfil = $imgPerfil;
+    $this->patrocinador = $patrocinador;
   }
 
   public function id() {
@@ -276,11 +300,28 @@ public static function registro($username, $password,$email,$fechaNac,$descripci
   {
     return $this->fechaNac;
   }
+  public function patrocinador()
+  {
+    return $this->patrocinador;
+  }
 
   public function compruebaPassword($password) {
     return password_verify($password, $this->password);
   }
+  public static function buscaUsuarioPatrocinado($username) {
+    $app = App::getSingleton();
+    $conn = $app->conexionBd();
+    $query = sprintf("SELECT * FROM usuarios WHERE username='%s'", $conn->real_escape_string($username));
+    $rs = $conn->query($query);
+    if ($rs && $rs->num_rows == 1) {
+      $fila = $rs->fetch_assoc();
+      $user = new Usuario($fila['id'], $fila['username'], $fila['password'], $fila['Descripcion'], $fila['Email'],$fila['FechaNac'], $fila['imagenPerfil']);
+      $rs->free();
 
+      return $user;
+    }
+    return false;
+  }
   /*public function cambiaPassword($nuevoPassword) {
     $this->password = password_hash($nuevoPassword, PASSWORD_DEFAULT);
   }*/

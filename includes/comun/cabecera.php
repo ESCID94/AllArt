@@ -40,8 +40,12 @@ function mostrarSaludo() {
 		<a href="<?= $app->resuelve('/videos.php')?>">Videos</a>
 		<a href="<?= $app->resuelve('/escritos.php')?>">Escritos</a>
 		<a href="<?= $app->resuelve('/patrocinadores.php')?>">Patrocinadores</a>
-  			
-		<input type = "text" placeholder = "Search..">
+  		
+		
+		<form method = "POST" action = "buscador.php">
+		<input type = "text" placeholder = "Buscar.." name = "palabra">
+		<input type = "submit" name = "buscar" value = "Buscar">
+		</form>
 	</ul>
 	
 
